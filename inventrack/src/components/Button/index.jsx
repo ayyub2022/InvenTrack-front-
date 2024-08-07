@@ -6,7 +6,7 @@ const shapes = {
 };
 const variants = {
   outline: {
-    black_900: "border-black-900 border border-solid text-black-900"
+    black_900: "border-black-900 border border-solid text-black-900",
     purple_700: "border-purple-700 border border-solid text-deep_purple-500",
     deep_purple_500:"border-deep_purple-500 border border-solid text-deep_purple-500",
   },
@@ -31,10 +31,10 @@ const Button = ({
   children,
   className = "",
   leftIcon,
-  rightIcon
+  rightIcon,
   shape,
   variant = "fill",
-  size = "xs"
+  size = "xs",
   color = "gray_200",
   ...restProps
 }) => {
