@@ -222,7 +222,6 @@ export default function OrdersPage() {
     <div className="h-[2px] bg-black-900"/>
     <div className="h-[2px] bg-black-900" />
 </div>
-
 <div className="flex w-[18%] items-center justify-center gap-3.5 p-1">
   <a href="#">
     <Button shape="round" className="w-[34px]">
@@ -232,7 +231,7 @@ export default function OrdersPage() {
   <a href="#">
     <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
   </a>
-  <div className="flex flex-1 items-center justify-between gap-5 p-1">
+  <div className="flex flex-1 items-center justify-center gap-1 p-2.5">
     <a href="#">
       <img
         src="images/img_ellipse1.png"
