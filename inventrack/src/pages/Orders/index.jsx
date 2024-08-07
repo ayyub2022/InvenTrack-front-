@@ -183,7 +183,7 @@ export default function OrdersPage() {
         <meta name="description" content="Web site created using create-react-app"/>
         </Helmet>
         <div className="w-full bg-blue_gray-50 shadow-md">
-          <header className="bg-white-a700">
+      <header className="bg-white-a700">
             <div className="relative h-[90px] content-center md:h-auto">
             <div className="container-xs flex items-center justify-between gap-5 md:px-5">
               <div className="flex w-[4%] flex-col gap-2 p-2">
@@ -192,59 +192,63 @@ export default function OrdersPage() {
                   <div className="h-[2px] bg-black-900"/>
               </div>
               <div className="mr-[22px] flex w-[16%] items-center justify-center gap-3.5">
-  <a href="#">
-    <Button shape="round" className="w-[34px]">
-      <img src="images/img_search.svg" />
-    </Button>
-  </a>
-  <a href="#">
-    <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
-  </a>
-  <div className="flex flex-1 items-center justify-between gap-5 p-2.5">
-    <a href="#">
-      <img
-        src="images/img_ellipse1.png"
-        alt="Image"
-        className="h-[40px] w-[40px] rounded-[20px] object-cover"
-      />
-    </a>
-    <Heading size="headingxs" as="p">
-      Ann Lee
-    </Heading>
-    <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
-  </div>
-</div>
-</div>
-<div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max flex-1 bg-white_a700 py-2.5">
-  <div className="container-xs flex items-center justify-between gap-5 md:px-5">
-    <div className="flex w-[4%] flex-col gap-2 p-2">
-    <div className="h-[2px] bg-black-900" />
-    <div className="h-[2px] bg-black-900"/>
-    <div className="h-[2px] bg-black-900" />
-</div>
-<div className="flex w-[18%] items-center justify-center gap-3.5 p-1">
-  <a href="#">
-    <Button shape="round" className="w-[34px]">
-      <img src="images/img_search.svg" />
-    </Button>
-  </a>
-  <a href="#">
-    <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
-  </a>
-  <div className="flex flex-1 items-center justify-center gap-1 p-2.5">
-    <a href="#">
-      <img
-        src="images/img_ellipse1.png"
-        alt="Image"
-        className="h-[40px] w-[40px] rounded-[20px] object-cover"
-      />
-    </a>
-    <Heading size="headingxs" as="p">
-      Ann Lee
-    </Heading>
-    <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
-  </div>
-</div>
+           <a href="#">
+             <Button shape="round" className="w-[34px]">
+               <img src="images/img_search.svg" />
+              </Button>
+          </a>
+          <a href="#">
+            <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
+          </a>
+          <div className="flex flex-1 items-center justify-between gap-5 p-2.5">
+            <a href="#">
+              <img
+                src="images/img_ellipse1.png"
+                alt="Image"
+                className="h-[40px] w-[40px] rounded-[20px] object-cover"
+              />
+            </a>
+            <Heading size="headingxs" as="p">
+              Ann Lee
+            </Heading>
+            <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
+          </div>
+        </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max flex-1 bg-white_a700 py-2.5">
+          <div className="container-xs flex items-center justify-between gap-5 md:px-5">
+            <div className="flex w-[4%] flex-col gap-2 p-2">
+            <div className="h-[2px] bg-black-900" />
+            <div className="h-[2px] bg-black-900"/>
+            <div className="h-[2px] bg-black-900" />
+        </div>
+        <div className="flex w-[18%] items-center justify-center gap-3.5 p-1">
+          <a href="#">
+            <Button shape="round" className="w-[34px]">
+              <img src="images/img_search.svg" />
+            </Button>
+          </a>
+          <a href="#">
+            <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
+          </a>
+          <div className="flex flex-1 items-center justify-center gap-1 p-2.5">
+            <a href="#">
+              <img
+                src="images/img_ellipse1.png"
+                alt="Image"
+                className="h-[40px] w-[40px] rounded-[20px] object-cover"
+              />
+            </a>
+            <Heading size="headingxs" as="p">
+              Ann Lee
+            </Heading>
+            <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+      </header>
 <div className="flex items-start gap-2">
   <SideBar11 className="bg-gradient" />
   <div ClassName="absolute bottom-0 left-0 right-0 top-0 my-auto ml-2.5 mr-5 flex h-max flex-1 flex-col gap-2.5 bg-white-a700 px-2.5 py-[124px] md:mx-0 md:py-5">
@@ -255,7 +259,7 @@ export default function OrdersPage() {
   variant="outline"
   shape="round"
   name="search"
-  placeholder={'Search order ID'}
+  placeholder={`Search order ID`}
   value={searchBarValue}
   onChange={(e) => setSearchBarValue(e.target.value)}
   prefix={
@@ -267,7 +271,7 @@ export default function OrdersPage() {
   }
   suffix={
     searchBarValue?.length > 0 ? (
-      <CloseSVG onClick={() => setSearchBarValue('')} height={24} width={24} fillColor="#10153fff" />
+      <CloseSVG onClick={() => setSearchBarValue("")} height={24} width={24} fillColor="#10153fff" />
     ) : null
   }
   className="w-[38%] gap-2.5 text-blue_gray-100 md:w-full"
