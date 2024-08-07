@@ -44,3 +44,14 @@ const CheckBox = React.forward.forwardRef(
     );
   },
 );
+
+CheckBox.propTypes = {
+  className: PropTypes.string,
+  name:PropTypes.string,
+  label:PropTypes.string,
+  id:PropTypes.string,
+  size:PropTypes.oneOf(["xs"]),
+  variant:PropTypes.oneOf(["primary"]),
+};
+
+export { CheckBox };
