@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Instock from "components/Instock";
+import Instock from "./components/Instock";
 
 function App() {
   return (
