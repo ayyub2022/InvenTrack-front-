@@ -85,7 +85,8 @@ export default function OrdersPage() {
               ),
               header: (info) => (
                   <div className="ml-3.5 flex p-3">
-                      <Text size="textxl" as="p">order ID</Text>
+                      <Text size="textxl" as="p">order ID
+                      </Text>
                   </div>
               ),
               meta: { width: "110px" },
@@ -136,11 +137,6 @@ export default function OrdersPage() {
                   </div>
               ),
               header: (info) => (
-                  <div className="ml-[22px] flex p-3">
-                      <Text size="textxl" as="p">Destination</Text>
-                  </div>
-              ),
-              header: (info) => (
                 <div className="ml-[22px] flex p-3">
                     <Text size="textxl" as="p">Destination</Text>
                 </div>
@@ -184,7 +180,7 @@ export default function OrdersPage() {
     <>
       <Helmet>
         <title>InvenTrack</title>
-        <metaname="description" content="Web site created using create-react-app"/>
+        <meta name="description" content="Web site created using create-react-app"/>
         </Helmet>
         <div className="w-full bg-blue_gray-50 shadow-md">
           <header className="bg-white-a700">
@@ -218,11 +214,13 @@ export default function OrdersPage() {
     <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
   </div>
 </div>
-<div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max flex-1 bg-white_a700 justify-center">
-  <div className="container-xs flex w-[45%] flex-col gap-5 p-2.5">
+</div>
+<div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max flex-1 bg-white_a700 py-2.5">
+  <div className="container-xs flex items-center justify-between gap-5 md:px-5">
+    <div className="flex w-[4%] flex-col gap-2 p-2">
     <div className="h-[2px] bg-black-900" />
+    <div className="h-[2px] bg-black-900"/>
     <div className="h-[2px] bg-black-900" />
-  </div>
 </div>
 
 <div className="flex w-[18%] items-center justify-center gap-3.5 p-1">
