@@ -10,3 +10,4 @@ export const getTotalSaleReturn = () => axios.get(`${API_URL}/total_sale_return`
 export const getTotalPurchase = () => axios.get(`${API_URL}/total_purchase`);
 export const getTotalIncome = () => axios.get(`${API_URL}/total_income`);
 export const SalesChart = ()=> axios.get(`${API_URL}/sales_data`)
+export const profile = ()=> axios.get(`${API_URL}/user/profile`)

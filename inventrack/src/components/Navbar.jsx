@@ -14,13 +14,13 @@ const Navbar = () => {
             <ul className="navbar-menu">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
+                <li><Link to="/stock">In Stock</Link></li>
+                <li> <Link to="/products">Products</Link></li>
                 <li className="dropdown">
                     <button className="dropdown-button" onClick={toggleDropdown}>
                         More
                     </button>
                     <div className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
-                        <Link to="/stock">In Stock</Link>
-                        <Link to="/products">Products</Link>
                         <Link to="/sales">Sales</Link>
                         <Link to="/orders">Orders</Link>
                         <Link to="/settings">Settings</Link>
