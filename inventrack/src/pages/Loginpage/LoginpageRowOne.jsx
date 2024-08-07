@@ -6,7 +6,7 @@ export default function LoginpageRowOne() {
   return (
     <div className="flex">
       <div className="container-xs flex px-[30px] md:px-5">
-        <div className="flex w-full gap-2.5 rounded-[5px] bg-white-A700 p-2.5 md:flex-col">
+        <div className="flex w-full gap-2.5 rounded-[5px] bg-white-a700 p-2.5 md:flex-col">
           <div className="flex w-[34%] flex-col gap-2.5 p-2.5 md:w-full">
             <InventoryManagement
               registerLink="Login"
@@ -32,25 +32,25 @@ export default function LoginpageRowOne() {
   <div className="flex flex-col gap-3.5">
     <div className="flex flex-col items-start gap-1 p-2.5">
       <Text as="p" className="text-gray-900_01">
-        Email
+        Email*
       </Text>
       <Input
         shape="round"
         type="email"
         name="email"
-        placeholder={"Enter your email"}
+        placeholder={`Enter your email`}
         className="self-stretch border border-gray-500"
       />
     </div>
     <div className="mx-2.5 mb-2.5 flex flex-col items-start gap-1 md:mx-0">
-      <Text as="p" className="text-gray-900_01">
-        Password
+      <Text as="p" className="!text-gray-900_01">
+        Password*
       </Text>
       <Input
         shape="round"
         type="password"
         name="password"
-        placeholder={"minimum 8 characters"}
+        placeholder={`minimum 8 characters`}
         className="self-stretch border border-gray-500"
       />
     </div>
@@ -65,7 +65,7 @@ export default function LoginpageRowOne() {
     <a href="#">
       <Text as="p" className="!font-medium !text-gray-900_01">
         Forgot password?
-        <Text>
+        </Text>
     </a>
   </div>
   <a href="#" target= "_blank">
@@ -79,7 +79,7 @@ export default function LoginpageRowOne() {
   <div className="flex p-2.5">
     <Text as="p"className="!font-medium!text-gray-900_01">
       <span className="text-gray-900_02">Not registered yet?</span>
-      <span className="text-gray-900_01">nbsp;Create&nbsp;</span>
+      <span className="text-gray-900_01">&nbsp;Create&nbsp;</span>
       <span className="text-gray-900_01">a new account</span>
     </Text>
     </div>
