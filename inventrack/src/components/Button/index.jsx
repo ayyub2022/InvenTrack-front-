@@ -50,8 +50,23 @@ const Button = ({
   );
 };
 Button.propTypes = {
-  
-}
+  className: PropTypes.string,
+  children: PropTypes.node,
+  leftIcon: PropTypes.node,
+  rightIcon:PropTypes.node,
+  shape: PropTypes.oneOf(["round"]),
+  size: PropTypes.oneOf(["sm", "xl", "md", "lg", "xs"]),
+  variant:PropTypes.oneOf(["outline", "gradient", "fill"]),
+  color:PropTypes.oneOf([
+    "black_900",
+    "purple_700",
+    "deep_purple_500",
+    "purple_700_deep_purple_500",
+    "blue_600_blue_600",
+    "gray_900_01",
+    "white_A700",
+    "gray_200",
+  ]),
+};
 
-
-})
+export {Button};
