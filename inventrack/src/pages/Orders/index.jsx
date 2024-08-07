@@ -279,14 +279,14 @@ export default function OrdersPage() {
 <div className="flex flex-1 justify-end gap-5 p-5 md:self-stretch sm:flex-col">
   <Datepicker
     name="datepicker"
-    className="w-[6%] rounded-[5px] border border-solid border-blue_gray_100 bg-white-A700 p-2 sm:w-full"
+    className="w-[6%] rounded-[5px] border border-solid border-blue_gray-100 bg-white-A700 p-2 sm:w-full"
 />
 <SelectBox
   size="sm"
   shape="round"
   indicator={<img src="images/img_arrowdown.svg" alt="Arrow Down" className="h-[24px] w-[24px]" />}
   name="arrowdown"
-  placeholder={'Sales'}
+  placeholder={`Sales`}
   options={dropDownOptions}
   className="w-[18%] gap-2.5 border border-solid border-blue_gray-100 sm:w-full"
 />
@@ -294,8 +294,8 @@ export default function OrdersPage() {
   size="sm"
   shape="round"
   indicator={<img src="images/img_arrowdown.svg" alt="Arrow Down" className="h-[24px] w-[24px]" />}
-  name="arrowdown one"
-  placeholder={'Status'}
+  name="arrowdown_one"
+  placeholder={`Status`}
   options={dropDownOptions}
   className="w-[20%] gap-2.5 border border-solid border-blue_gray-100 sm:w-full"
 />
@@ -303,14 +303,14 @@ export default function OrdersPage() {
   size="sm"
   shape="round"
   indicator={<img src="images/img_arrowdown.svg" alt="Arrow Down" className="h-[24px] w-[24px]" />}
-  name="arrowdown two"
-  placeholder={'Filter'}
+  name="arrowdown_two"
+  placeholder={`Filter`}
   options={dropDownOptions}
   className="w-[16%] gap-2.5 border border-solid border-blue_gray-100 sm:w-full"
 />
 </div>
 </div>
-<ReactTable>
+<ReactTable
   size="xs"
   bodyProps={{ className: ""}}
   headerProps={{ className: "border-black-900 border-b border-solid"}}
@@ -321,7 +321,9 @@ export default function OrdersPage() {
   />
   </div>
   <div className="absolute left-0 right-0 top-2.5 my-auto ml-auto mr-2 flex flex-1 items-center justify-center border-b border-solid border-indigo-50 md:relative md:mr-0 md:flex-col">
-  <Heading />
+  <Heading as="h1" className="md:px-5">
+    Orders
+  </Heading >
 <div className="flex flex-1 justify-end p-5 md:flex-col md:self-stretch md:px-5">
   <Button
     color="purple_700"
@@ -346,7 +348,7 @@ export default function OrdersPage() {
     variant="gradient"
     shape="round"
     color="purple_700 deep_purple_500"
-    leftIcon={<img src="images/img_close.svg" alt="Close" className="h-[14px] w-[14px]" />}
+    leftIcon={<Img src="images/img_close.svg" alt="Close" className="h-[14px] w-[14px]" />}
     className="ml-5 min-w-[192px] gap-2.5 md:ml-0"
   >
     New Orders
