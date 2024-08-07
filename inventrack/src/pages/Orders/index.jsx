@@ -85,7 +85,8 @@ export default function OrdersPage() {
               ),
               header: (info) => (
                   <div className="ml-3.5 flex p-3">
-                      <Text size="textxl" as="p">order ID</Text>
+                      <Text size="textxl" as="p">order ID
+                      </Text>
                   </div>
               ),
               meta: { width: "110px" },
@@ -136,11 +137,6 @@ export default function OrdersPage() {
                   </div>
               ),
               header: (info) => (
-                  <div className="ml-[22px] flex p-3">
-                      <Text size="textxl" as="p">Destination</Text>
-                  </div>
-              ),
-              header: (info) => (
                 <div className="ml-[22px] flex p-3">
                     <Text size="textxl" as="p">Destination</Text>
                 </div>
@@ -184,10 +180,10 @@ export default function OrdersPage() {
     <>
       <Helmet>
         <title>InvenTrack</title>
-        <metaname="description" content="Web site created using create-react-app"/>
+        <meta name="description" content="Web site created using create-react-app"/>
         </Helmet>
         <div className="w-full bg-blue_gray-50 shadow-md">
-          <header className="bg-white-a700">
+      <header className="bg-white-a700">
             <div className="relative h-[90px] content-center md:h-auto">
             <div className="container-xs flex items-center justify-between gap-5 md:px-5">
               <div className="flex w-[4%] flex-col gap-2 p-2">
@@ -196,58 +192,63 @@ export default function OrdersPage() {
                   <div className="h-[2px] bg-black-900"/>
               </div>
               <div className="mr-[22px] flex w-[16%] items-center justify-center gap-3.5">
-  <a href="#">
-    <Button shape="round" className="w-[34px]">
-      <img src="images/img_search.svg" />
-    </Button>
-  </a>
-  <a href="#">
-    <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
-  </a>
-  <div className="flex flex-1 items-center justify-between gap-5 p-2.5">
-    <a href="#">
-      <img
-        src="images/img_ellipse1.png"
-        alt="Image"
-        className="h-[40px] w-[40px] rounded-[20px] object-cover"
-      />
-    </a>
-    <Heading size="headingxs" as="p">
-      Ann Lee
-    </Heading>
-    <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
-  </div>
-</div>
-<div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max flex-1 bg-white_a700 justify-center">
-  <div className="container-xs flex w-[45%] flex-col gap-5 p-2.5">
-    <div className="h-[2px] bg-black-900" />
-    <div className="h-[2px] bg-black-900" />
-  </div>
-</div>
-
-<div className="flex w-[18%] items-center justify-center gap-3.5 p-1">
-  <a href="#">
-    <Button shape="round" className="w-[34px]">
-      <img src="images/img_search.svg" />
-    </Button>
-  </a>
-  <a href="#">
-    <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
-  </a>
-  <div className="flex flex-1 items-center justify-between gap-5 p-1">
-    <a href="#">
-      <img
-        src="images/img_ellipse1.png"
-        alt="Image"
-        className="h-[40px] w-[40px] rounded-[20px] object-cover"
-      />
-    </a>
-    <Heading size="headingxs" as="p">
-      Ann Lee
-    </Heading>
-    <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
-  </div>
-</div>
+           <a href="#">
+             <Button shape="round" className="w-[34px]">
+               <img src="images/img_search.svg" />
+              </Button>
+          </a>
+          <a href="#">
+            <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
+          </a>
+          <div className="flex flex-1 items-center justify-between gap-5 p-2.5">
+            <a href="#">
+              <img
+                src="images/img_ellipse1.png"
+                alt="Image"
+                className="h-[40px] w-[40px] rounded-[20px] object-cover"
+              />
+            </a>
+            <Heading size="headingxs" as="p">
+              Ann Lee
+            </Heading>
+            <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
+          </div>
+        </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max flex-1 bg-white_a700 py-2.5">
+          <div className="container-xs flex items-center justify-between gap-5 md:px-5">
+            <div className="flex w-[4%] flex-col gap-2 p-2">
+            <div className="h-[2px] bg-black-900" />
+            <div className="h-[2px] bg-black-900"/>
+            <div className="h-[2px] bg-black-900" />
+        </div>
+        <div className="flex w-[18%] items-center justify-center gap-3.5 p-1">
+          <a href="#">
+            <Button shape="round" className="w-[34px]">
+              <img src="images/img_search.svg" />
+            </Button>
+          </a>
+          <a href="#">
+            <img src="images/img_bell.svg" alt="Bell" className="h-[24px] w-[24px]" />
+          </a>
+          <div className="flex flex-1 items-center justify-center gap-1 p-2.5">
+            <a href="#">
+              <img
+                src="images/img_ellipse1.png"
+                alt="Image"
+                className="h-[40px] w-[40px] rounded-[20px] object-cover"
+              />
+            </a>
+            <Heading size="headingxs" as="p">
+              Ann Lee
+            </Heading>
+            <img src="images/img_down.svg" alt="Down" className="h-[8px] w-[8px]" />
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+      </header>
 <div className="flex items-start gap-2">
   <SideBar11 className="bg-gradient" />
   <div ClassName="absolute bottom-0 left-0 right-0 top-0 my-auto ml-2.5 mr-5 flex h-max flex-1 flex-col gap-2.5 bg-white-a700 px-2.5 py-[124px] md:mx-0 md:py-5">
@@ -258,7 +259,7 @@ export default function OrdersPage() {
   variant="outline"
   shape="round"
   name="search"
-  placeholder={'Search order ID'}
+  placeholder={`Search order ID`}
   value={searchBarValue}
   onChange={(e) => setSearchBarValue(e.target.value)}
   prefix={
@@ -270,7 +271,7 @@ export default function OrdersPage() {
   }
   suffix={
     searchBarValue?.length > 0 ? (
-      <CloseSVG onClick={() => setSearchBarValue('')} height={24} width={24} fillColor="#10153fff" />
+      <CloseSVG onClick={() => setSearchBarValue("")} height={24} width={24} fillColor="#10153fff" />
     ) : null
   }
   className="w-[38%] gap-2.5 text-blue_gray-100 md:w-full"
@@ -278,14 +279,14 @@ export default function OrdersPage() {
 <div className="flex flex-1 justify-end gap-5 p-5 md:self-stretch sm:flex-col">
   <Datepicker
     name="datepicker"
-    className="w-[6%] rounded-[5px] border border-solid border-blue_gray_100 bg-white-A700 p-2 sm:w-full"
+    className="w-[6%] rounded-[5px] border border-solid border-blue_gray-100 bg-white-A700 p-2 sm:w-full"
 />
 <SelectBox
   size="sm"
   shape="round"
   indicator={<img src="images/img_arrowdown.svg" alt="Arrow Down" className="h-[24px] w-[24px]" />}
   name="arrowdown"
-  placeholder={'Sales'}
+  placeholder={`Sales`}
   options={dropDownOptions}
   className="w-[18%] gap-2.5 border border-solid border-blue_gray-100 sm:w-full"
 />
@@ -293,8 +294,8 @@ export default function OrdersPage() {
   size="sm"
   shape="round"
   indicator={<img src="images/img_arrowdown.svg" alt="Arrow Down" className="h-[24px] w-[24px]" />}
-  name="arrowdown one"
-  placeholder={'Status'}
+  name="arrowdown_one"
+  placeholder={`Status`}
   options={dropDownOptions}
   className="w-[20%] gap-2.5 border border-solid border-blue_gray-100 sm:w-full"
 />
@@ -302,14 +303,14 @@ export default function OrdersPage() {
   size="sm"
   shape="round"
   indicator={<img src="images/img_arrowdown.svg" alt="Arrow Down" className="h-[24px] w-[24px]" />}
-  name="arrowdown two"
-  placeholder={'Filter'}
+  name="arrowdown_two"
+  placeholder={`Filter`}
   options={dropDownOptions}
   className="w-[16%] gap-2.5 border border-solid border-blue_gray-100 sm:w-full"
 />
 </div>
 </div>
-<ReactTable>
+<ReactTable
   size="xs"
   bodyProps={{ className: ""}}
   headerProps={{ className: "border-black-900 border-b border-solid"}}
@@ -320,7 +321,9 @@ export default function OrdersPage() {
   />
   </div>
   <div className="absolute left-0 right-0 top-2.5 my-auto ml-auto mr-2 flex flex-1 items-center justify-center border-b border-solid border-indigo-50 md:relative md:mr-0 md:flex-col">
-  <Heading />
+  <Heading as="h1" className="md:px-5">
+    Orders
+  </Heading >
 <div className="flex flex-1 justify-end p-5 md:flex-col md:self-stretch md:px-5">
   <Button
     color="purple_700"
@@ -345,7 +348,7 @@ export default function OrdersPage() {
     variant="gradient"
     shape="round"
     color="purple_700 deep_purple_500"
-    leftIcon={<img src="images/img_close.svg" alt="Close" className="h-[14px] w-[14px]" />}
+    leftIcon={<Img src="images/img_close.svg" alt="Close" className="h-[14px] w-[14px]" />}
     className="ml-5 min-w-[192px] gap-2.5 md:ml-0"
   >
     New Orders
