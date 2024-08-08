@@ -1,33 +1,24 @@
 import React from "react";
-import Routes from "./Routes";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Instock from "./components/Instock";
 
-function App(){
+function App() {
   return (
     <Router>
-      <Routes />
+      <Navbar />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/stock" element={<Instock />} />
+        </Routes>
+      </div>
+      <Footer />
     </Router>
   );
 }
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import Navbar from './pages/Navbar';
-import Footer from './pages/Footer';
-
-function App() {
-    return (
-      <Router>
-      <Navbar />
-      <div className="content">
-          <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile/:userId" element={<Profile />} />
-              </Routes>
-            </div>
-            <Footer />
-        </Router>
-    );
-};
 export default App;
