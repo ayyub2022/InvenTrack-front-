@@ -1,10 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* General styles for the home page */
 .home-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #e9d8a6;
 }
 
 .card {
