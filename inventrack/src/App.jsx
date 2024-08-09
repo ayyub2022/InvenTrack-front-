@@ -5,6 +5,7 @@ import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Instock from "./components/Instock";
+import Products from "./components/Products";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/stock" element={<Instock />} />
+          <Route path="/products" element={<Products/>} />
         </Routes>
       </div>
       <Footer />
