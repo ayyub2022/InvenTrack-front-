@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';  
 import './Profile.css'; // Import the CSS file for styling
 import { useParams } from 'react-router-dom';
@@ -103,6 +104,7 @@ const Profile = () => {
             ) : (
                 <p>Loading...</p>
             )}
+
         </div>
     );
 };
