@@ -8,6 +8,7 @@ import Instock from "./components/Instock";
 import Products from "./components/Products";
 
 function App() {
+  // const []
   return (
     <Router>
       <Navbar />
@@ -16,11 +17,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/stock" element={<Instock />} />
-          <Route path="/products" element={<Products/>} />
+          <Route path="/products" element={<Products />} />
         </Routes>
       </div>
       <Footer />
     </Router>
   );
 }
+
 export default App;
