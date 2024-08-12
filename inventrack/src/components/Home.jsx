@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './Home.css'; 
-import ChartComponent from "./ChartComponent"; 
-import ChartComponentPro from "./ChartComponentPro";
+
 const Home = () => {
     
     const [bestSellerLast7Days, setBestSellerLast7Days] = useState(null);
@@ -72,15 +71,7 @@ const Home = () => {
             alt="Income Earned"
           />
             </div>
-            {/* <ChartComponent/> */}
-            
-             <div className="card">
-                <h2>Top Selling Product</h2>
-                <div> <ChartComponent /></div>
-            </div>
-            <div className="card">
-                <ChartComponentPro/>
-            </div>
+           
         </div>
     );
 };
