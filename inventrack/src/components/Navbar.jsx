@@ -21,8 +21,9 @@ const Navbar = () => {
                         More
                     </button>
                     <div className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
-                        <Link to="/sales">Sales</Link>
-                        <Link to="/orders">Orders</Link>
+                        <Link to="/Overview">Overview</Link>
+                        <Link to="/cart">Cart</Link>
+
                         <Link to="/settings">Settings</Link>
                     </div>
                 </li>
