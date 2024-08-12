@@ -1,121 +1,172 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { fetchProducts, fetchCategories } from '../api'; // Importing from api.js
+import ProductDetails from './ProductDetail'; // Importing the new component
+import './Product.css'; // Assuming you have a CSS file for styling
+import { useNavigate } from 'react-router-dom';
 
-export default function Products() {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+const Product = () => {
+    const navigate = useNavigate()
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [isFormVisible, setIsFormVisible] = useState(false);
+    const [newProduct, setNewProduct] = useState({
+        name: '',
+        category_id: '',
+        bp: '',
+        sp: ''
+    });
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const res = await fetch("http://localhost:5555/categories");
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data);
-        }
-        setCategories(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getCategories();
-  }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const productsResponse = await fetchProducts();
+                setProducts(productsResponse.data);
 
-  useEffect(() => {
-    if (selectedCategory !== null) {
-      const getProducts = async () => {
+                const categoriesResponse = await fetchCategories();
+                setCategories(categoriesResponse.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleCategoryChange = async (e) => {
+        setSelectedCategory(e.target.value);
         try {
-          const res = await fetch(
-            `http://localhost:5555/categories/${selectedCategory}/products`
-          );
-          const data = await res.json();
-          if (!res.ok) {
-            throw new Error(data);
-          }
-          setProducts(data);
+            const response = await axios.get(`http://127.0.0.1:5555/categories/${e.target.value}/products`);
+            setProducts(response.data);
         } catch (error) {
-          console.log(error);
+            console.error('Error fetching products by category:', error);
         }
-      };
-      getProducts();
-    }
-  }, [selectedCategory]);
+    };
 
-  const handleCategoryClick = (id) => {
-    setSelectedCategory(id);
-  };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewProduct(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
-  // Helper function to parse image URL from the string
-  const parseImageUrl = (imageString) => {
-    try {
-      const imageArray = JSON.parse(imageString);
-      return imageArray[0] || ""; // Return the first image URL if available
-    } catch (error) {
-      console.error("Error parsing image URL:", error);
-      return "";
-    }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://127.0.0.1:5555/create_product', newProduct);
+            setProducts(prevProducts => [...prevProducts, response.data]);
+            setNewProduct({
+                name: '',
+                category_id: '',
+                bp: '',
+                sp: ''
+            });
+            setIsFormVisible(false);
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }
+    };
 
-  return (
-    <div>
-      {selectedCategory === null ? (
-        <div className="categories-list">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-              onClick={() => handleCategoryClick(category.id)}
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                className="rounded-t-lg"
-                src={category.image_url}
-                alt={category.name}
-              />
-              <div className="p-5">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {category.name}
-                </h5>
-              </div>
+    const handleProductClick = (product) => {
+        setSelectedProduct(product);
+        navigate(`/products/${product.id}`);
+
+    };
+
+    const handleCloseDetails = () => {
+        setSelectedProduct(null);
+    };
+
+    return (
+        <div className="product-container">
+            <h2>Products</h2>
+            <div className="filter-section">
+                <label htmlFor="category">Category:</label>
+                <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
+                    <option value="">All Categories</option>
+                    {categories.map(category => (
+                        <option key={category.id} value={category.id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
             </div>
-          ))}
+            <button className="add-product-btn" onClick={() => setIsFormVisible(!isFormVisible)}>
+                Add Product
+            </button>
+            {isFormVisible && (
+                <form className="add-product-form" onSubmit={handleSubmit}>
+                    <label>
+                        Name:
+                        <input
+                            type="text"
+                            name="name"
+                            value={newProduct.name}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Category:
+                        <select
+                            name="category_id"
+                            value={newProduct.category_id}
+                            onChange={handleInputChange}
+                            required
+                        >
+                            <option value="">Select Category</option>
+                            {categories.map(category => (
+                                <option key={category.id} value={category.id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                    <label>
+                        Buying Price:
+                        <input
+                            type="number"
+                            name="bp"
+                            value={newProduct.bp}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Selling Price:
+                        <input
+                            type="number"
+                            name="sp"
+                            value={newProduct.sp}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </label>
+                    <button type="submit">Add Product</button>
+                </form>
+            )}
+            <div className="product-list">
+                {products.length > 0 ? (
+                    products.map(product => (
+                        <div key={product.id} className="product-item" onClick={() => handleProductClick(product)}>
+                            <h3>{product.name}</h3>
+                            <p>Price: {product.sp}</p>
+                            <p>Category ID: {product.category_id}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No products found.</p>
+                )}
+            </div>
+            {selectedProduct && (
+                <ProductDetails product={selectedProduct} onClose={handleCloseDetails} />
+            )}
         </div>
-      ) : (
-        <div>
-          <button
-            onClick={() => setSelectedCategory(null)}
-            className="mb-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-          >
-            Back to Categories
-          </button>
-          <div className="products-list">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-              >
-                <img
-                  class="p-8 rounded-t-lg"
-                  src={parseImageUrl(product.image)}
-                  alt={product.name}
-                />
-                <div class="px-5 pb-5">
-                  <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {product.name}
-                  </h5>
-                  <div class="flex items-center justify-between">
-                  <span class="text-3xl font-bold text-gray-900 dark:text-white">${product.sp}</span>
-            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to Orders</a>
-        
-                  </div>
+    );
+};
 
-                  
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+export default Product;
+
