@@ -1,0 +1,43 @@
+/* src/components/Cart.css */
+.cart-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cart-items {
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.payment-section {
+    text-align: center;
+}
+
+.payment-section label {
+    margin-right: 10px;
+}
+
+.payment-section select {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.payment-section button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.payment-section button:hover {
+    background-color: #218838;
+}
