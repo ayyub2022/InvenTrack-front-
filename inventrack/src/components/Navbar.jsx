@@ -23,10 +23,7 @@ const Navbar = () => {
                     <div className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
                         <Link to="/Overview">Overview</Link>
                         <Link to="/cart">Cart</Link>
-<<<<<<< HEAD
-=======
 
->>>>>>> main
                         <Link to="/settings">Settings</Link>
                     </div>
                 </li>
