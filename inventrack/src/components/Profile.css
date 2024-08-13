@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> main
 .profile-container {
     max-width: 800px;
     margin: 0 auto;
@@ -56,6 +61,8 @@
     border-radius: 5px;
     margin-bottom: 15px;
     box-sizing: border-box;
+<<<<<<< HEAD
+=======
 =======
 .profile-container {
     display: flex;
@@ -93,4 +100,5 @@ h2 {
 
 p {
     font-size: 1em;
+>>>>>>> main
 }
