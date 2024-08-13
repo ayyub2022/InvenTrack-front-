@@ -1,10 +1,13 @@
+// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // Ensure the path is correct
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { ThemeProvider } from './components/ThemeContext';
+import './App.css'; // Ensure global styles are imported
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <ThemeProvider>
+        <App />
+    </ThemeProvider>
 );
