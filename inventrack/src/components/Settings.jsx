@@ -7,7 +7,6 @@ import Appearance from './Appearance';
 import PaymentDetails from './PaymentDetails';
 import ResetSettings from './ResetSettings';
 import AboutInventrack from './AboutInventrack';
-// import AdminPage from './AdminPage'; // You can remove this if not used
 import AdminAuth from './AdminAuth';
 import AdminHomePage from './AdminHomePage';
 
@@ -150,12 +149,24 @@ const Settings = () => {
     return (
         <div className="settings-container">
             <div className="settings-buttons">
-                <button onClick={() => setActiveSection('login')}>Login/Sign Up</button>
-                <button onClick={() => setActiveSection('appearance')}>Appearance</button>
-                <button onClick={() => setActiveSection('payment')}>Payment Details</button>
-                <button onClick={() => setActiveSection('reset')}>Reset Settings</button>
-                <button onClick={() => setActiveSection('about')}>About Inventrack</button>
-                <button onClick={() => setActiveSection('admin')}>Admin Page</button>
+                <button onClick={() => setActiveSection('login')}>
+                    <i className="fas fa-user-circle"></i> Login/Sign Up
+                </button>
+                <button onClick={() => setActiveSection('appearance')}>
+                    <i className="fas fa-paint-brush"></i> Appearance
+                </button>
+                <button onClick={() => setActiveSection('payment')}>
+                    <i className="fas fa-credit-card"></i> Payment Details
+                </button>
+                <button onClick={() => setActiveSection('reset')}>
+                    <i className="fas fa-undo"></i> Reset Settings
+                </button>
+                <button onClick={() => setActiveSection('about')}>
+                    <i className="fas fa-info-circle"></i> About Inventrack
+                </button>
+                <button onClick={() => setActiveSection('admin')}>
+                    <i className="fas fa-user-shield"></i> Admin Page
+                </button>
             </div>
             <div className="settings-content">
                 {renderSection()}

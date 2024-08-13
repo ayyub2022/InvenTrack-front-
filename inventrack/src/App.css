@@ -1,0 +1,40 @@
+/* src/App.css */
+
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.small {
+    font-size: 12px;
+}
+
+body.medium {
+    font-size: 16px;
+}
+
+body.large {
+    font-size: 20px;
+}
+
+/* General styles */
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.font-size-controls button {
+    margin-right: 5px;
+}
