@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';  
 // import './Profile.css'; // Import the CSS file for styling
@@ -38,6 +39,13 @@
 //             [name]: value
 //         });
 //     };
+=======
+import React, { useState, useEffect } from 'react';
+
+import axios from 'axios';  
+import './Profile.css'; // Import the CSS file for styling
+import { useParams } from 'react-router-dom';
+>>>>>>> main
 
 //     const handleSave = async () => {
 //         try {
@@ -58,6 +66,7 @@
 
 
 
+<<<<<<< HEAD
 //     return (
 //         <div className="profile-container">
 //             {user ? (
@@ -106,5 +115,56 @@
 //         </div>
 //     );
 // };
+=======
+    return (
+        <div className="profile-container">
+            {user ? (
+                <>
+                    <h2>User Profile</h2>
+                    {isEditing ? (
+                        <div className="profile-form">
+                            <label htmlFor="name">Name:</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="password">Password:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                            />
+                            <button onClick={handleSave}>Save</button>
+                            <button onClick={() => setIsEditing(false)}>Cancel</button>
+                        </div>
+                    ) : (
+                        <div className="profile-info">
+                            <p><strong>Name:</strong> {user.name}</p>
+                            <p><strong>Email:</strong> {user.email}</p>
+                            <button onClick={handleEdit}>Edit Profile</button>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <p>Loading...</p>
+            )}
+
+        </div>
+    );
+};
+>>>>>>> main
 
 // export default Profile;

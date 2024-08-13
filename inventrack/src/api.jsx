@@ -40,3 +40,5 @@ export const deleteProduct = (productId) => axios.delete(`${API_URL}/product/${p
 export const getCategories = () => axios.get(`${API_URL}/categories`);
 export const getProductsByCategory = (categoryId) => axios.get(`${API_URL}/categories/${categoryId}/products`);
 
+export const SalesChart = ()=> axios.get(`${API_URL}/sales_data`)
+export const profile = ()=> axios.get(`${API_URL}/user/profile`)

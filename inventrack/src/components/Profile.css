@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
 .profile-container {
     max-width: 800px;
     margin: 0 auto;
@@ -58,4 +61,44 @@
     border-radius: 5px;
     margin-bottom: 15px;
     box-sizing: border-box;
+<<<<<<< HEAD
+=======
+=======
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.profile-content {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.profile-details {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #e9d8a6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+p {
+    font-size: 1em;
+>>>>>>> main
 }

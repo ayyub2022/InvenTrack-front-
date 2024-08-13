@@ -12,6 +12,11 @@ import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
 import NotFound from "./components/Error404"; 
 import AdminHomePage from './components/AdminHomePage';
+<<<<<<< HEAD
+=======
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+>>>>>>> main
 
 function App() {
 
@@ -20,6 +25,7 @@ function App() {
     setCart([...toCart,product])
     console.log(toCart)
   }
+
 
 
   return (
@@ -31,7 +37,11 @@ function App() {
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/stock" element={<Instock />} />
           <Route path="/products" element={<Products/>} />
+<<<<<<< HEAD
           <Route path="/products/:productId" element={<ProductDetail addToCart={addToCart} />} /> 
+=======
+          <Route path="/products/:productId" element={<ProductDetail addToCart={addToCart} />} /> {/* New route */}
+>>>>>>> main
           <Route path="/cart" element={<Cart cart={toCart} />} /> {/* New route */}
           <Route path="/overview" element={<Overview />} />
           <Route path="/settings" element={<Settings />} />

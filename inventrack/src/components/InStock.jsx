@@ -7,7 +7,6 @@ export default function Instock() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -72,7 +71,6 @@ export default function Instock() {
       ) : error ? (
         <div>{error}</div>
       ) : (
-
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -85,12 +83,10 @@ export default function Instock() {
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <label for="checkbox-all-search" class="sr-only">
-
                       checkbox
                     </label>
                   </div>
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                   product ID
                 </th>
@@ -103,7 +99,6 @@ export default function Instock() {
                 <th scope="col" class="px-6 py-3">
                   Category
                 </th>
-
               </tr>
             </thead>
             <tbody>
@@ -120,12 +115,10 @@ export default function Instock() {
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                       />
                       <label for="checkbox-table-search-1" class="sr-only">
-
                         checkbox
                       </label>
                     </div>
                   </td>
-
                   <td class="px-6 py-4">{item.id}</td>
                   <th
                     scope="row"
@@ -141,6 +134,7 @@ export default function Instock() {
               ))}
             </tbody>
           </table>
+          
         </div>
       )}
     </>
