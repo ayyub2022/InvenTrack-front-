@@ -71,11 +71,7 @@ const Home = () => {
             alt="Income Earned"
           />
             </div>
-<<<<<<< HEAD
-           
-=======
 
->>>>>>> main
         </div>
     );
 };

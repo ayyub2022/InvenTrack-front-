@@ -16,7 +16,7 @@ import AdminHomePage from './components/AdminHomePage';
 =======
 import Signup from "./components/Signup";
 import Login from "./components/Login";
->>>>>>> main
+>>>>>>> maina
 
 function App() {
 
