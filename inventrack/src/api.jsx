@@ -9,7 +9,7 @@ export const getTotalRevenue = () => axios.get(`${API_URL}/total_revenue`);
 export const getTotalSaleReturn = () => axios.get(`${API_URL}/total_sale_return`);
 export const getTotalPurchase = () => axios.get(`${API_URL}/total_purchase`);
 export const getTotalIncome = () => axios.get(`${API_URL}/total_income`);
-export const SalesChart = () => axios.get(`${API_URL}/sales_data`);
+
 
 // Profile
 export const getUserProfile = () => axios.get(`${API_URL}/profile`);
@@ -40,6 +40,5 @@ export const deleteProduct = (productId) => axios.delete(`${API_URL}/product/${p
 export const getCategories = () => axios.get(`${API_URL}/categories`);
 export const getProductsByCategory = (categoryId) => axios.get(`${API_URL}/categories/${categoryId}/products`);
 
-=======
-export const SalesChart = ()=> axios.get(`${API_URL}/sales_data`)
-export const profile = ()=> axios.get(`${API_URL}/user/profile`)
+export const SalesChart = ()=> axios.get(`${API_URL}/sales_data`);
+export const profile = ()=> axios.get(`${API_URL}/user/profile`);

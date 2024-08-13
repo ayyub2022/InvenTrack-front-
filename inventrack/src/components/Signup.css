@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f9fc;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Container */
+
 .signup-container {
     max-width: 400px;
     margin: 5% auto;
@@ -17,7 +17,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading */
+
 .signup-container h2 {
     margin-bottom: 1.5rem;
     font-size: 24px;
@@ -25,7 +25,7 @@ body {
     text-align: center;
 }
 
-/* Form */
+
 .signup-form {
     display: flex;
     flex-direction: column;
