@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { fetchProducts, fetchCategories } from '../api'; // Importing from api.js
-import ProductDetails from './ProductDetail'; // Importing the new component
-import './Product.css'; // Assuming you have a CSS file for styling
+import { fetchProducts, fetchCategories } from '../api'; 
+import ProductDetails from './ProductDetail'; 
+import './Product.css'; 
 import { useNavigate } from 'react-router-dom';
 
 const Product = () => {
