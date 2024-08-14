@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
-import './Login.css';
-import { login } from '../api';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission behavior
+
     try {
-      const response = await login({ email, password });
-      if (response.data.message === 'Login successful') {
-        navigate('/profile');
-      }
+      const response = await axios.post(
+        'http://localhost:5555/login',
+        { email, password },
+        {
+          withCredentials: true, // This ensures cookies are sent and stored
+        }
+      );
+
+      console.log(response.data); // Expect this to confirm successful login
+      navigate("/profile"); // Redirect to profile after successful login
     } catch (error) {
-      setError(error.response?.data?.error || 'An error occurred during login.');
+      console.error('Login error:', error.response?.data || error.message);
+      setError("Login failed. Please check your credentials and try again.");
     }
   };
 
@@ -42,7 +51,9 @@ const Login = () => {
           className="login-input"
         />
         {error && <p className="error-message">{error}</p>}
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
     </div>
   );

@@ -1,18 +1,18 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const getUserProfile = async () => {
       try {
         const response = await axios.get("http://localhost:5555/profile", {
-          withCredentials: true,
+          withCredentials: true, // This must be true to send cookies
         });
         setUser(response.data);
       } catch (error) {
@@ -21,10 +21,9 @@ export default function Profile() {
           error.response?.data || error.message
         );
         setError("Error fetching user profile. Please try again later.");
-        navigate("/login")
       }
     };
-    getUserProfile();
+    getUserProfile()
   }, []);
 
   if (error) return <div className="profile-error">{error}</div>;
@@ -42,25 +41,33 @@ export default function Profile() {
       </p>
 
       <h2 className="profile-section-title">Activities</h2>
-      <ul className="profile-list">
-        {user.activities.map((activity, index) => (
-          <li key={index} className="profile-list-item">
-            <strong>{activity.activity}</strong> -{" "}
-            {new Date(activity.timestamp).toLocaleString()}
-          </li>
-        ))}
-      </ul>
+      {user.activities.length > 0 ? (
+        <ul className="profile-list">
+          {user.activities.map((activity, index) => (
+            <li key={index} className="profile-list-item">
+              <strong>{activity.activity}</strong> -{" "}
+              {new Date(activity.timestamp).toLocaleString()}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No activities found.</p>
+      )}
 
       <h2 className="profile-section-title">Transaction History</h2>
-      <ul className="profile-list">
-        {user.transaction_history.map((transaction) => (
-          <li key={transaction.id} className="profile-list-item">
-            <strong>Transaction #{transaction.id}</strong>:{" "}
-            {transaction.transaction_type} (Inventory ID:{" "}
-            {transaction.inventory_id})
-          </li>
-        ))}
-      </ul>
+      {user.transaction_history.length > 0 ? (
+        <ul className="profile-list">
+          {user.transaction_history.map((transaction) => (
+            <li key={transaction.id} className="profile-list-item">
+              <strong>Transaction #{transaction.id}</strong>:{" "}
+              {transaction.transaction_type} (Inventory ID:{" "}
+              {transaction.inventory_id})
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No transaction history available.</p>
+      )}
     </div>
   );
 }
