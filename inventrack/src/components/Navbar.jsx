@@ -1,31 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; 
+import './Navbar.css';
 
 const Navbar = () => {
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
-
-    const toggleDropdown = () => {
-        setDropdownOpen(!isDropdownOpen);
-    };
-
     return (
         <nav className="navbar">
             <ul className="navbar-menu">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
                 <li><Link to="/stock">In Stock</Link></li>
-                <li> <Link to="/products">Products</Link></li>
-                <li className="dropdown">
-                    <button className="dropdown-button" onClick={toggleDropdown}>
-                        More
-                    </button>
-                    <div className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
-                        <Link to="/sales">Sales</Link>
-                        <Link to="/orders">Orders</Link>
-                        <Link to="/settings">Settings</Link>
-                    </div>
-                </li>
+                <li><Link to="/products">Products</Link></li>
+                <li><Link to="/cart">Cart</Link></li>
+                <li><Link to="/settings">Settings</Link></li>
             </ul>
         </nav>
     );
