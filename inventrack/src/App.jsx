@@ -13,17 +13,17 @@ import Appearance from './components/Appearance';
 import AdminHomePage from './components/AdminHomePage';
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./components/Login"; // Ensure this import is correct
-import { useTheme } from './components/ThemeContext'; // Import the useTheme hook
-
-// Example components for new routes
-const ProtectedComponent = () => <div>Protected Content</div>;
-const PublicComponent = () => <div>Public Content</div>;
-const LoginComponent = () => <div>Login</div>;
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import SupplyRequests from "./components/SupplyRequests";
+import Clerks from "./components/Clerks";
+import PaymentsAdmin from "./components/PaymentsAdmin";
+import Admins from "./components/Admins";
+import { useTheme } from './components/ThemeContext';
 
 function App() {
   const [toCart, setCart] = useState([]);
-  const { theme, fontSize } = useTheme(); // Use the useTheme hook
+  const { theme, fontSize } = useTheme();
   
   const addToCart = (product) => {
     setCart([...toCart, product]);
@@ -40,19 +40,21 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} /> {/* Protected Route */}
+          <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
           <Route path="/stock" element={<Instock />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/products/:productId" element={<ProductDetail addToCart={addToCart} />} /> 
-          <Route path="/cart" element={<ProtectedRoute element={<Cart cart={toCart} />} />} /> 
+          <Route path="/products/:productId" element={<ProductDetail addToCart={addToCart} />} />
+          <Route path="/cart" element={<ProtectedRoute element={<Cart cart={toCart} />} />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/admin" element={<AdminHomePage />} /> 
-          <Route path="/login" element={<Login />} /> 
-          <Route path="*" element={<NotFound />} /> 
+          <Route path="/admin" element={<AdminHomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/appearance" element={<Appearance />} />
-          <Route path="/protected" element={<ProtectedRoute element={<ProtectedComponent />} />} />
-          <Route path="/public" element={<PublicComponent />} />
-          <Route path="/login-component" element={<LoginComponent />} /> {/* Example login component */}
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/supply-requests" element={<SupplyRequests />} />
+          <Route path="/clerks" element={<Clerks />} />
+          <Route path="/payments-admin" element={<PaymentsAdmin />} />
+          <Route path="/admins" element={<Admins />} />
         </Routes>
       </div>
       <Footer />

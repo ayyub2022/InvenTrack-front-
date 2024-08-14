@@ -42,3 +42,7 @@ export const getProductsByCategory = (categoryId) => axios.get(`${API_URL}/categ
 
 export const SalesChart = ()=> axios.get(`${API_URL}/sales_data`);
 export const profile = ()=> axios.get(`${API_URL}/user/profile`);
+export const getSupplyRequests = () => axios.get(`${API_URL}/supply-requests`);
+export const createSupplyRequest = (data) => axios.post(`${API_URL}/supply-requests`, data);
+export const updateSupplyRequest = (id, data) => axios.put(`${API_URL}/supply-requests/${id}`, data);
+export const deleteSupplyRequest = (id) => axios.delete(`${API_URL}/supply-requests/${id}`);
