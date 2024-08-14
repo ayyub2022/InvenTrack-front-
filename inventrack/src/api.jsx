@@ -22,7 +22,7 @@ export const fetchCategories = () => axios.get(`${API_URL}/categories`);
 export const signup = (data) => axios.post(`${API_URL}/signup`, data);
 export const login = (data) => axios.post(`${API_URL}/login`, data);
 export const logout = () => axios.post(`${API_URL}/logout`);
-export const checkSession = () => axios.get(`${API_URL}/checksession`);
+export const checkSession = () => axios.get('http://127.0.0.1:5555/checksession', { withCredentials: true })
 
 // User Management
 export const getUsers = () => axios.get(`${API_URL}/users`);
