@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { fetchProducts, fetchCategories } from '../api'; // Importing from api.js
-import ProductDetails from './ProductDetail'; // Importing the new component
-import './Product.css'; // Assuming you have a CSS file for styling
+import { fetchProducts, fetchCategories } from '../api';
+import ProductDetails from './ProductDetail';
+import './Product.css';
 import { useNavigate } from 'react-router-dom';
 
+const placeholderImage = 'https://via.placeholder.com/150';
+
 const Product = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -15,7 +17,9 @@ const Product = () => {
         name: '',
         category_id: '',
         bp: '',
-        sp: ''
+        sp: '',
+        image: '',  // Change from image_url to image
+        image_file: null  
     });
     const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -53,16 +57,48 @@ const Product = () => {
         }));
     };
 
+    const handleFileChange = (e) => {
+        setNewProduct(prevState => ({
+            ...prevState,
+            image_file: e.target.files[0]  
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let imageUrl = newProduct.image;
+
+        if (newProduct.image_file) {
+            const formData = new FormData();
+            formData.append('file', newProduct.image_file);
+            try {
+                const imageResponse = await axios.post('http://127.0.0.1:5555/upload_image', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                imageUrl = imageResponse.data.image_url;
+                console.log('Uploaded image URL:', imageUrl);
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                return;
+            }
+        }
+
         try {
-            const response = await axios.post('http://127.0.0.1:5555/create_product', newProduct);
+            const response = await axios.post('http://127.0.0.1:5555/create_product', {
+                ...newProduct,
+                image: imageUrl
+            });
             setProducts(prevProducts => [...prevProducts, response.data]);
             setNewProduct({
                 name: '',
                 category_id: '',
                 bp: '',
-                sp: ''
+                sp: '',
+                image: '',  
+                image_file: null  
             });
             setIsFormVisible(false);
         } catch (error) {
@@ -73,7 +109,6 @@ const Product = () => {
     const handleProductClick = (product) => {
         setSelectedProduct(product);
         navigate(`/products/${product.id}`);
-
     };
 
     const handleCloseDetails = () => {
@@ -145,6 +180,23 @@ const Product = () => {
                             required
                         />
                     </label>
+                    <label>
+                        Image URL:
+                        <input
+                            type="text"
+                            name="image"
+                            value={newProduct.image}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <label>
+                        Or choose file:
+                        <input
+                            type="file"
+                            name="image_file"
+                            onChange={handleFileChange}
+                        />
+                    </label>
                     <button type="submit">Add Product</button>
                 </form>
             )}
@@ -155,6 +207,12 @@ const Product = () => {
                             <h3>{product.name}</h3>
                             <p>Price: {product.sp}</p>
                             <p>Category ID: {product.category_id}</p>
+                            <img 
+                                src={product.image || placeholderImage} 
+                                alt={product.name} 
+                                className="product-image"
+                                onError={(e) => e.target.src = placeholderImage}
+                            />
                         </div>
                     ))
                 ) : (

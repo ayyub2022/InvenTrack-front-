@@ -45,7 +45,7 @@ const Home = () => {
                 <h1>Welcome to Our Dashboard</h1>
                 <p>Your one-stop solution for managing sales, revenue, and more.</p>
                 <img
-                    src="https://via.placeholder.com/600x200?text=Welcome+Image"
+                    src="https://st.depositphotos.com/9999814/52407/i/450/depositphotos_524071248-stock-photo-smart-warehouse-management-system-with.jpg"
                     alt="Welcome"
                     className="welcome-image"
                 />
