@@ -1,4 +1,3 @@
-// src/api/api.jsx
 import axios from "axios";
 
 const API_URL = "http://127.0.0.1:5555";
@@ -16,7 +15,7 @@ export const getTotalIncome = () => axios.get(`${API_URL}/total_income`);
 
 // User Profile
 export const getUserProfile = () =>
-  axios.get(`${API_URL}/profile`, { withCredentials: true }); //this does not work
+  axios.get(`${API_URL}/profile`, { withCredentials: true });
 
 // Products
 export const fetchProducts = () => axios.get(`${API_URL}/products`);
@@ -40,30 +39,17 @@ export const SalesChart = () => axios.get(`${API_URL}/sales_data`);
 
 // Authentication
 export const signup = (data) => axios.post(`${API_URL}/signup`, data);
-export const login = ({email,password}) =>
-  axios.post(`${API_URL}/login`, {email,password}, { withCredentials: true }); //this does not
+export const login = ({ email, password }) =>
+  axios.post(`${API_URL}/login`, { email, password }, { withCredentials: true });
 export const logout = () => axios.post(`${API_URL}/logout`);
-export const checkSession = () => axios.get('http://127.0.0.1:5555/checksession', { withCredentials: true })
+export const checkSession = () => axios.get('http://127.0.0.1:5555/checksession', { withCredentials: true });
 
 // User Management
 export const getUsers = () => axios.get(`${API_URL}/users`);
 export const getUser = (userId) => axios.get(`${API_URL}/users/${userId}`);
-
 export const updateUser = (userId, data) => axios.patch(`${API_URL}/users/${userId}`, data);
 
-// Products
-export const getProducts = () => axios.get(`${API_URL}/products`);
-export const getProduct = (productId) => axios.get(`${API_URL}/product/${productId}`);
-export const createProduct = (data) => axios.post(`${API_URL}/create_product`, data);
-export const updateProduct = (productId, data) => axios.put(`${API_URL}/product/${productId}`, data);
-export const deleteProduct = (productId) => axios.delete(`${API_URL}/product/${productId}`);
-
-// Categories
-export const getCategories = () => axios.get(`${API_URL}/categories`);
-export const getProductsByCategory = (categoryId) => axios.get(`${API_URL}/categories/${categoryId}/products`);
-
-export const SalesChart = ()=> axios.get(`${API_URL}/sales_data`);
-export const profile = ()=> axios.get(`${API_URL}/user/profile`);
+// Supply Requests
 export const getSupplyRequests = () => axios.get(`${API_URL}/supply-requests`);
 export const createSupplyRequest = (data) => axios.post(`${API_URL}/supply-requests`, data);
 export const updateSupplyRequest = (id, data) => axios.put(`${API_URL}/supply-requests/${id}`, data);
