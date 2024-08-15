@@ -10,15 +10,13 @@ import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
 import NotFound from "./components/Error404";
 import Appearance from './components/Appearance';
-import AdminHomePage from './components/AdminHomePage';
+import AdminDashboard from './components/Admin/AdminDashboard';
+
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
-import SupplyRequests from "./components/SupplyRequests";
-import Clerks from "./components/Clerks";
-import PaymentsAdmin from "./components/PaymentsAdmin";
-import Admins from "./components/Admins";
+
+
 import { useTheme } from './components/ThemeContext';
 
 function App() {
@@ -40,21 +38,18 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
+          <Route path="/profile" element={<Profile />} />
+
           <Route path="/stock" element={<Instock />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:productId" element={<ProductDetail addToCart={addToCart} />} />
-          <Route path="/cart" element={<ProtectedRoute element={<Cart cart={toCart} />} />} />
+          <Route path="/cart" element={<Cart cart={toCart} />} />
+
           <Route path="/settings" element={<Settings />} />
-          <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/appearance" element={<Appearance />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/supply-requests" element={<SupplyRequests />} />
-          <Route path="/clerks" element={<Clerks />} />
-          <Route path="/payments-admin" element={<PaymentsAdmin />} />
-          <Route path="/admins" element={<Admins />} />
+           <Route path="/admin/dashboard" element={<AdminDashboard />}/>
         </Routes>
       </div>
       <Footer />

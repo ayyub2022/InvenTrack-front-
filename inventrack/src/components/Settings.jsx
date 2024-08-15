@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { login, signup } from '../api'; // Importing from api.js
-import './settings.css'; // Assuming you have a CSS file for styling
-
-// Importing other components
+import { useNavigate } from 'react-router-dom';
+import { login, signup } from '../api';
+import './settings.css';
 import Appearance from './Appearance';
 import PaymentDetails from './PaymentDetails';
 import ResetSettings from './ResetSettings';
 import AboutInventrack from './AboutInventrack';
-import AdminAuth from './AdminAuth';
-import AdminHomePage from './AdminHomePage';
 
 const Settings = () => {
     const [activeSection, setActiveSection] = useState('login');
@@ -21,8 +18,8 @@ const Settings = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [showAdminAuth, setShowAdminAuth] = useState(false);
-    const [adminLoggedIn, setAdminLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,6 +30,7 @@ const Settings = () => {
         e.preventDefault();
         setError('');
         setSuccess('');
+        setLoading(true);
 
         try {
             if (isLogin) {
@@ -47,19 +45,13 @@ const Settings = () => {
             }
         } catch (error) {
             setError(error.response?.data?.error || error.message);
+        } finally {
+            setLoading(false);
+            setTimeout(() => setSuccess(''), 5000);
         }
-    };
-
-    const handleAdminLogin = () => {
-        setAdminLoggedIn(true);
-        setShowAdminAuth(false);
     };
 
     const renderSection = () => {
-        if (adminLoggedIn) {
-            return <AdminHomePage />;
-        }
-
         switch (activeSection) {
             case 'login':
                 return (
@@ -115,7 +107,9 @@ const Settings = () => {
                                     </select>
                                 </div>
                             )}
-                            <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
+                            <button type="submit" disabled={loading}>
+                                {loading ? 'Processing...' : (isLogin ? 'Login' : 'Sign Up')}
+                            </button>
                             {error && <div className="error-message">{error}</div>}
                             {success && <div className="success-message">{success}</div>}
                         </form>
@@ -132,15 +126,6 @@ const Settings = () => {
                 return <ResetSettings />;
             case 'about':
                 return <AboutInventrack />;
-            case 'admin':
-                return showAdminAuth ? (
-                    <AdminAuth onClose={() => setShowAdminAuth(false)} onLogin={handleAdminLogin} />
-                ) : (
-                    <div className="admin-auth-prompt">
-                        <h2>Admin Page</h2>
-                        <button onClick={() => setShowAdminAuth(true)}>Login as Admin</button>
-                    </div>
-                );
             default:
                 return <div>Select a section</div>;
         }
@@ -164,8 +149,8 @@ const Settings = () => {
                 <button onClick={() => setActiveSection('about')}>
                     <i className="fas fa-info-circle"></i> About Inventrack
                 </button>
-                <button onClick={() => setActiveSection('admin')}>
-                    <i className="fas fa-user-shield"></i> Admin Page
+                <button onClick={() => navigate('/admin/dashboard')}>
+                    <i className="fas fa-tachometer-alt"></i> Admin Dashboard
                 </button>
             </div>
             <div className="settings-content">

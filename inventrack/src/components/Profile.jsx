@@ -1,19 +1,15 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
 
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/profile", {
-          withCredentials: true,
-        });
+        const response = await axios.get("http://127.0.0.1:5555/profile");
         setUser(response.data);
       } catch (error) {
         console.error(
@@ -21,7 +17,6 @@ export default function Profile() {
           error.response?.data || error.message
         );
         setError("Error fetching user profile. Please try again later.");
-        navigate("/login")
       }
     };
     getUserProfile();
