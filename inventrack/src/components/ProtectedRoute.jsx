@@ -5,6 +5,7 @@ import axios from 'axios';
 const ProtectedRoute = ({ element: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
+
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
