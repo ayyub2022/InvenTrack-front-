@@ -1,19 +1,30 @@
-import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ProtectedRoute = ({ element: Component, ...rest }) => {
-  const navigate = useNavigate()
-  const isAuthenticated = async () => {
-    try {
-      const response = await axios.get('http://localhost:5555/checksession', { withCredentials: true });
-      return response.status === 200;
-    } catch (error) {
-      navigate("/login")
-    }
-  };
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-  return isAuthenticated() ? <Component {...rest} /> : <Navigate to="/login" />;
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get('http://localhost:5555/checksession', { withCredentials: true });
+        setIsAuthenticated(response.status === 200);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  if (isAuthenticated === null) {
+   
+    return <div>Loading...</div>;
+  }
+
+  return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

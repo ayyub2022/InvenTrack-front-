@@ -1,117 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import { useLocation } from 'react-router-dom'; // Ensure this import is used
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const PaymentForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const propertyId = searchParams.get('propertyId');
   const userId = searchParams.get('userId');
 
-  // State variables
-  const [amount, setAmount] = useState('');  // Define setAmount
-  const [clientSecret, setClientSecret] = useState('');
+  const [amount, setAmount] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (propertyId && userId && amount) {
-      const fetchClientSecret = async () => {
-        try {
-          const response = await fetch('http://localhost:5050/userpayment/create-intent', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              amount: parseFloat(amount),
-              property_id: propertyId,
-              user_id: userId,
-            }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || 'Failed to fetch client secret');
-          }
-
-          setClientSecret(data.client_secret);
-        } catch (error) {
-          setErrorMessage(`Error fetching client secret: ${error.message}`);
-          console.error('Error fetching client secret:', error.message);
-        }
-      };
-
-      fetchClientSecret();
-    }
-  }, [amount, propertyId, userId]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!stripe || !elements || !clientSecret) {
-      return;
-    }
-
     setLoading(true);
 
     try {
-      const cardElement = elements.getElement(CardElement);
-      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: cardElement,
-          billing_details: {
-            // Add any additional billing details here, e.g., email, name
-          },
+      const response = await fetch('/api/mpesa_payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          amount: parseFloat(amount),
+          property_id: propertyId,
+          user_id: userId,
+        }),
       });
 
-      if (error) {
-        setErrorMessage(`Payment failed: ${error.message}`);
-        console.error('Payment failed:', error.message);
-        return;
-      }
+      const data = await response.json();
 
-      if (paymentIntent && paymentIntent.status === 'succeeded') {
-        try {
-          const paymentData = {
-            amount: parseFloat(amount),
-            property_id: propertyId,
-            user_id: userId,
-            payment_intent_id: paymentIntent.id,
-          };
-
-          const response = await fetch('http://localhost:5050/userpayment/confirm-payment', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(paymentData),
-          });
-
-          const text = await response.text();
-
-          if (!response.ok) {
-            throw new Error(JSON.parse(text).message || 'Failed to post payment details');
-          }
-
-          setResponseMessage('Payment succeeded and details posted successfully!');
-          setErrorMessage('');
-          setAmount(''); // Reset amount field after successful payment
-        } catch (error) {
-          setErrorMessage(`Error posting payment details: ${error.message}`);
-          console.error('Error posting payment details:', error);
-        }
+      if (response.ok) {
+        setResponseMessage('Payment succeeded and details posted successfully!');
       } else {
-        setErrorMessage('Payment failed. Please try again.');
+        setErrorMessage(data.message || 'Payment failed');
       }
     } catch (error) {
-      setErrorMessage(`Error confirming payment: ${error.message}`);
-      console.error('Error confirming payment:', error);
+      setErrorMessage(`Error during payment: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -133,11 +59,7 @@ const PaymentForm = () => {
             placeholder="Enter amount"
           />
         </div>
-        <div>
-          <label>Card Details:</label>
-          <CardElement />
-        </div>
-        <button type="submit" disabled={loading || !stripe || !elements}>
+        <button type="submit" disabled={loading}>
           {loading ? 'Processing...' : 'Submit Payment'}
         </button>
       </form>
