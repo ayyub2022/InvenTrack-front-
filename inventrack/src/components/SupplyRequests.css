@@ -1,0 +1,111 @@
+/* SupplyRequests.css */
+
+.supply-requests-container {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px; /* Add margin between buttons */
+}
+
+.approve-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.approve-button:hover {
+    background-color: #218838;
+}
+
+.decline-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.decline-button:hover {
+    background-color: #c82333;
+}
+
+button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Card Styles */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 15px 0;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden; /* Prevent content from overflowing */
+    display: flex;
+    flex-direction: column; /* Allow the card to expand vertically */
+}
+
+.card-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    font-size: 14px;
+    color: #555;
+    flex: 1; /* Allow the card body to take up remaining space */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.card-footer button {
+    margin-left: 10px; /* Add margin between buttons in the card footer */
+}
+
+/* Use existing button styles in card footer */
+.card-footer .approve-button,
+.card-footer .decline-button {
+    padding: 8px 12px; /* Adjust padding to fit within the card */
+}
