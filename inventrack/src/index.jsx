@@ -1,8 +1,13 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { ThemeProvider } from './components/ThemeContext';
+import './App.css'; // Ensure global styles are imported
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-
-root.render(<App />);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <ThemeProvider>
+        <App />
+    </ThemeProvider>
+);

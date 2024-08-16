@@ -1,70 +1,153 @@
-# Getting Started with Create React App
+```markdown
+# InvenTrack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+InvenTrack is a comprehensive store management system designed to streamline inventory, sales, and administrative tasks. It provides an intuitive dashboard for monitoring store performance, managing clerks, handling supply requests, processing payments, and overseeing admins. The system is built using modern web technologies and is tailored to meet the needs of small to medium-sized businesses.
 
-## Available Scripts
+## Features
+- **Admin Dashboard**: Centralized hub for overseeing store operations with visual performance reports.
+- **Inventory Management**: Track products, monitor stock levels, and manage supply requests.
+- **Sales Tracking**: Keep tabs on total revenue, purchases, returns, and top-selling products.
+- **User Management**: Admins can manage clerks and other admins, ensuring proper access control.
+- **Responsive Design**: Optimized for both desktop and mobile devices, providing flexibility for users on the go.
 
-In the project directory, you can run:
+## Technologies Used
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Flask, SQLAlchemy
+- **Charts**: Chart.js via `react-chartjs-2`
+- **Database**: SQLite (can be extended to other relational databases)
+- **API**: RESTful APIs with Axios for frontend-backend communication
 
-### `npm start`
+## Installation and Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
+Ensure you have the following installed on your machine:
+- Node.js and npm
+- Python 3.8 or higher
+- Flask
+- SQLite (or another preferred database system)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend Setup
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/inventrack.git
+   cd inventrack/backend
+   ```
 
-### `npm test`
+2. **Create a Virtual Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### `npm run build`
+4. **Run the Application**:
+   ```bash
+   flask run
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. **Database Initialization**:
+   Set up the database using SQLAlchemy models and apply any migrations.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend Setup
+1. **Navigate to the Frontend Directory**:
+   ```bash
+   cd ../frontend
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. **Run the Application**:
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Access the Application**:
+   Visit `http://localhost:3000` in your browser to access the frontend.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Project Structure
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+InvenTrack/
+│
+├── backend/                # Python application
+│   ├── invenTrack/         # Main Python project folder
+│   │   ├── __init__.py
+│   │   ├── settings.py     # Project settings
+│   │   ├── urls.py         # URL configurations
+│   │   ├── wsgi.py
+│   │   └── asgi.py
+│   ├── invenApp/           # Python app for InvenTrack
+│   │   ├── migrations/     # Database migrations
+│   │   ├── models.py       # Python models
+│   │   ├── views.py        # View logic
+│   │   ├── urls.py         # App-specific URLs
+│   ├── manage.py
+│   ├── requirements.txt    # Python dependencies
+│   └── venv/               # Virtual environment
+│
+├── frontend/               # React application
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── App.js
+│   │   ├── index.js
+│   ├── package.json
+│   └── webpack.config.js   # Webpack configuration
+│
+└── README.md
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+## Usage
+- **Admin Dashboard**: Accessible through the `/dashboard` route, where you can manage inventory, view performance charts, and handle user management.
+- **Reports**: Access visual reports on sales and product performance within the dashboard.
+- **Supply Requests**: View, approve, or deny supply requests.
+- **User Management**: Add, edit, or remove clerks and admins from the system.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Customization
+### Styling
+The application uses Tailwind CSS for styling. You can customize the theme by modifying the `tailwind.config.js` file in the frontend directory.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Extending the API
+New API routes can be added in the `routes.py` file under the backend directory. Ensure that the corresponding frontend components are updated to handle new data.
 
-### Code Splitting
+```markdown
+## Contributing to InvenTrack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Fork the Repository**: Start by forking the InvenTrack repository to your GitHub account.
 
-### Analyzing the Bundle Size
+2. **Create a New Branch**: 
+   ```bash
+   git checkout -b feature/your-feature
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. **Make Your Changes**: Implement your changes in the new branch.
 
-### Making a Progressive Web App
+4. **Commit Your Changes**:
+   ```bash
+   git commit -m 'Add feature: description of feature'
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+5. **Push to Your Branch**:
+   ```bash
+   git push origin feature/your-feature
+   ```
 
-### Advanced Configuration
+6. **Open a Pull Request**: Submit a pull request to the main repository for review.
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+For inquiries, suggestions, or contributions, feel free to contact [InvenTrack].
+```

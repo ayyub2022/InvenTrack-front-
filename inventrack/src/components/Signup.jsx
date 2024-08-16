@@ -14,7 +14,7 @@ const Signup = () => {
     try {
       const response = await axios.post('/signup', { name, email, password, role });
       if (response.data.message) {
-        // Handle success (e.g., redirect or show a success message)
+        
       }
     } catch (error) {
       setError(error.response.data.error || 'An error occurred during signup.');
