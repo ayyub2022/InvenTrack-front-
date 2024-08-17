@@ -78,3 +78,8 @@ h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: calc(33.333% - 20px);
 }
+.product-image {
+    width: 100px; /* or any other size that fits your layout */
+    height: auto;
+    margin-top: 10px;
+}
