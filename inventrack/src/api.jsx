@@ -20,7 +20,7 @@ export const fetchCategories = () => axios.get(`${API_URL}/categories`);
 
 // Authentication
 export const signup = (data) => axios.post(`${API_URL}/signup`, data);
-export const login = (data) => axios.post(`${API_URL}/login`, data);
+export const login = (data) => axios.post(`${API_URL}/login`, data,{withCredentials:true})
 export const logout = () => axios.post(`${API_URL}/logout`);
 export const checkSession = () => axios.get('http://127.0.0.1:5555/checksession', { withCredentials: true })
 
@@ -53,3 +53,10 @@ export const updateAdmin = (id, data) => axios.put(`${API_URL}/admins/${id}`, da
 export const deleteAdmin = (id) => axios.delete(`${API_URL}/admins/${id}`);
 export const getAdmins = () => axios.get(`${API_URL}/admins`);
 export const getAdmin = (id) => axios.get(`${API_URL}/admins/${id}`);
+
+
+
+export const getPaymentStatus = () => axios.get(`${API_URL}/payment_status`);
+
+
+export const initiateMpesaPayment = (data) => axios.post(`${API_URL}/mpesa_payment`, data);

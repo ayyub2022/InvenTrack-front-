@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const ProtectedRoute = ({ element: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-
+  const location = useLocation();
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -20,11 +20,14 @@ const ProtectedRoute = ({ element: Component, ...rest }) => {
   }, []);
 
   if (isAuthenticated === null) {
-   
     return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
+  return isAuthenticated ? (
+    <Component {...rest} />
+  ) : (
+    <Navigate to="/login" state={{ from: location }} />
+  );
 };
 
 export default ProtectedRoute;

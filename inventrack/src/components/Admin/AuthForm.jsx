@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { signup, login } from '../../api/api';
+import { signup } from '../../api';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './auth.css';  // Import the CSS file
 
 const AuthForm = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -18,6 +21,8 @@ const AuthForm = () => {
     });
   };
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -33,9 +38,14 @@ const AuthForm = () => {
         console.log('Admin signed up:', response.data);
         // handle successful signup
       } else {
-        const response = await login(formData);
+        const response = await axios.post(
+          'http://localhost:5555/login',
+          { email: formData.email, password: formData.password },
+          { withCredentials: true } // This ensures cookies are sent and stored
+        );
         console.log('Admin logged in:', response.data);
         // handle successful login
+        navigate('/admin/dashboard'); // Redirect to dashboard after login
       }
     } catch (error) {
       console.error(`${isSignup ? 'Signup' : 'Login'} failed:`, error);
@@ -44,7 +54,7 @@ const AuthForm = () => {
   };
 
   return (
-    <div>
+    <div className="auth-form-container">
       <h2>{isSignup ? 'Admin Signup' : 'Admin Login'}</h2>
       <form onSubmit={handleSubmit}>
         {isSignup && (
@@ -75,9 +85,6 @@ const AuthForm = () => {
         />
         <button type="submit">{isSignup ? 'Signup' : 'Login'}</button>
       </form>
-      <p onClick={toggleForm} style={{ cursor: 'pointer', color: 'blue' }}>
-        {isSignup ? 'Already have an account? Login here' : 'Don’t have an account? Signup here'}
-      </p>
     </div>
   );
 };

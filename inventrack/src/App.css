@@ -5,6 +5,18 @@ body.light {
     color: #000000;
 }
 
+html{
+    background-color: rgba(226, 176, 37, 0.329);
+    height: auto;
+}
+
+body>*{
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: rgba(226, 176, 37, 0.329);
+    height: auto;
+}
+
 body.dark {
     background-color: #333333;
     color: #ffffff;

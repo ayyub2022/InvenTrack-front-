@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login, signup } from '../api';
+import {  signup } from '../api';
 import './settings.css';
 import Appearance from './Appearance';
 import PaymentDetails from './PaymentDetails';
 import ResetSettings from './ResetSettings';
 import AboutInventrack from './AboutInventrack';
+import axios from 'axios'
 
 const Settings = () => {
     const [activeSection, setActiveSection] = useState('login');
@@ -34,10 +35,14 @@ const Settings = () => {
 
         try {
             if (isLogin) {
-                const response = await login({
-                    email: formData.email,
-                    password: formData.password,
-                });
+                const response = await axios.post(
+                    'http://localhost:5555/login',
+                    { email:formData.email, password :formData.password},
+                    {
+                      withCredentials: true, // This ensures cookies are sent and stored
+                    }
+                  );
+                
                 setSuccess(response.data.message);
             } else {
                 const response = await signup(formData);
@@ -143,13 +148,13 @@ const Settings = () => {
                 <button onClick={() => setActiveSection('payment')}>
                     <i className="fas fa-credit-card"></i> Payment Details
                 </button>
-                <button onClick={() => setActiveSection('reset')}>
+                {/* <button onClick={() => setActiveSection('reset')}>
                     <i className="fas fa-undo"></i> Reset Settings
-                </button>
+                </button> */}
                 <button onClick={() => setActiveSection('about')}>
                     <i className="fas fa-info-circle"></i> About Inventrack
                 </button>
-                <button onClick={() => navigate('/admin/dashboard')}>
+                <button onClick={() => navigate('/admin/login')}>
                     <i className="fas fa-tachometer-alt"></i> Admin Dashboard
                 </button>
             </div>

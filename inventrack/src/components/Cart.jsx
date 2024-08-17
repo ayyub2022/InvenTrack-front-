@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
+import { getUserProfile, initiateMpesaPayment } from '../api'; // Ensure this path is correct
 import './Cart.css';
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, updateCart }) => {
     const [cartItems, setCartItems] = useState([]);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -21,23 +20,33 @@ const Cart = ({ cart }) => {
 
     const handleCheckout = async () => {
         try {
-            const response = await axios.post('/mpesa_payment', {
+            // Fetch user profile
+            const userProfileResponse = await getUserProfile();
+            const userId = userProfileResponse.data.id; // Adjust based on actual response
+
+            // Initiate M-Pesa payment
+            const response = await initiateMpesaPayment({
                 phone_number: phoneNumber,
                 amount: cartItems.reduce((total, item) => total + item.sp, 0),
-                user_id: 1 // Replace with actual user ID
+                user_id: userId
             });
 
             setPaymentResponse(response.data);
 
-            // Redirect or show a success message
             if (response.data.CheckoutRequestID) {
-                navigate('/success'); // Assuming you have a success page
+                navigate('/success'); // Redirect to success page
             } else {
                 console.error('Failed to initiate M-Pesa payment:', response.data);
             }
         } catch (error) {
             console.error('Error during checkout:', error);
         }
+    };
+
+    const handleRemoveFromCart = (itemToRemove) => {
+        const updatedCart = cartItems.filter(item => item !== itemToRemove);
+        setCartItems(updatedCart);
+        updateCart(updatedCart);
     };
 
     return (
@@ -48,7 +57,8 @@ const Cart = ({ cart }) => {
                     cartItems.map((item, index) => (
                         <div key={index} className="cart-item">
                             <p>{item.name}</p>
-                            <p>Price: {item.sp}</p>
+                            <p>Price: ${item.sp.toFixed(2)}</p>
+                            <button onClick={() => handleRemoveFromCart(item)}>Remove from Cart</button>
                         </div>
                     ))
                 ) : (
