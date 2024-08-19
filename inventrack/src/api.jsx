@@ -1,7 +1,7 @@
 // src/api/api.jsx
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:5555'; 
+const API_URL =process.env.REACT_APP_SERVER_API_URI; 
 
 export const getTopSellingProduct = () => axios.get(`${API_URL}/top_selling_product`);
 export const getBestSellerLast7Days = () => axios.get(`${API_URL}/best_seller_last_7_days`);

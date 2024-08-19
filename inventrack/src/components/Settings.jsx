@@ -157,6 +157,9 @@ const Settings = () => {
                 <button onClick={() => navigate('/admin/login')}>
                     <i className="fas fa-tachometer-alt"></i> Admin Dashboard
                 </button>
+                <button onClick={() => navigate('/clark-products')}>
+                    <i className="fas fa-home"></i> Clark
+                </button>
             </div>
             <div className="settings-content">
                 {renderSection()}
