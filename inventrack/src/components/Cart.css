@@ -1,43 +1,26 @@
-/* src/components/Cart.css */
-.cart-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.cart-items {
-    margin-bottom: 20px;
-}
-
 .cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
     padding: 10px;
+    background-color: #f9f9f9;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.payment-section {
-    text-align: center;
-}
-
-.payment-section label {
-    margin-right: 10px;
-}
-
-.payment-section select {
-    padding: 5px;
-    margin-right: 10px;
-}
-
-.payment-section button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
+.cart-item button {
+    background-color: #e74c3c;
+    color: white;
     border: none;
+    padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
-.payment-section button:hover {
-    background-color: #218838;
+.cart-item button:hover {
+    background-color: #c0392b;
 }
