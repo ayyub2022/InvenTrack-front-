@@ -3,14 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetail.css'; // Importing CSS file for styling
 import { getProduct } from '../api';
 
-const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
+const ProductDetail = ({ addToCart }) => {
     const [product, setProduct] = useState(null);
-    const [quantity, setQuantity] = useState(1); // State to track quantity
-    const [showNotification, setShowNotification] = useState(false); // State to show notification
-    const [error, setError] = useState(''); // State to handle error
-    const [showLoginPrompt, setShowLoginPrompt] = useState(false); // State to handle login prompt
-    const { productId } = useParams(); // Destructure id from useParams
-    const navigate = useNavigate(); // Initialize useNavigate hook
+    const [quantity, setQuantity] = useState(1);
+    const [showNotification, setShowNotification] = useState(false);
+    const { productId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +17,6 @@ const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
                 setProduct(response.data);
             } catch (error) {
                 console.error('Error fetching product:', error);
-                setError('Failed to load product details');
             }
         };
 
@@ -27,13 +24,12 @@ const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
     }, [productId]);
 
     const handleAddToCart = () => {
-        if (isLoggedIn) {
-            addToCart({ ...product, quantity });
-            setShowNotification(true); // Show notification
-            setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
-        } else {
-            setShowLoginPrompt(true); // Show login prompt
-        }
+        addToCart({ ...product, quantity });
+        setShowNotification(true);
+        setTimeout(() => {
+            setShowNotification(false);
+            navigate('/products'); // Redirect to /products after 5 seconds
+        }, 3000); // Show notification for 5 seconds
     };
 
     const handleIncreaseQuantity = () => setQuantity(quantity + 1);
@@ -43,30 +39,17 @@ const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
         }
     };
 
-    const handleClose = () => {
-        navigate('/products'); // Navigate to products page
-    };
-
-    const handleLoginRedirect = () => {
-        navigate('/login'); // Navigate to login page
-    };
-
-    if (error) {
-        return <div className="error-message">{error}</div>; // Show error message if there is an error
-    }
-
     if (!product) {
-        return <div className="loading-message">Loading...</div>; // Show loading state
+        return <div className="loading-message">Loading...</div>;
     }
 
     return (
         <div className='product-detail-container'>
             <div className="product-details">
-                <button className="close-details" onClick={handleClose} aria-label="Close">X</button>
+                <button className="close-details" onClick={() => navigate('/products')} aria-label="Close">X</button>
                 <h3>{product.name}</h3>
                 <img src={product.image} alt={product.name} className="product-image" />
                 <p>Price: ${product.sp.toFixed(2)}</p>
-                <p>Category ID: {product.category_id}</p>
                 <p>Buying Price: ${product.bp.toFixed(2)}</p>
                 <div className="quantity-controls">
                     <button onClick={handleDecreaseQuantity} aria-label="Decrease quantity">-</button>
@@ -74,14 +57,38 @@ const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
                     <button onClick={handleIncreaseQuantity} aria-label="Increase quantity">+</button>
                 </div>
                 <button onClick={handleAddToCart} className="add-to-cart-btn" aria-label="Add to cart">Add to Cart</button>
-                {showNotification && <p className="added-to-cart-message">This product has been added to your cart.</p>}
-                {showLoginPrompt && (
-                    <div className="login-prompt">
-                        <p>You need to be logged in to add items to the cart.</p>
-                        <button onClick={handleLoginRedirect}>Login</button>
-                    </div>
-                )}
             </div>
+
+            {showNotification && (
+                <div
+                    className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+                    <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            className="w-3.5 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500 float-right" viewBox="0 0 320.591 320.591">
+                            <path
+                                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                                data-original="#000000"></path>
+                            <path
+                                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                                data-original="#000000"></path>
+                        </svg>
+
+                        <div className="my-8 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-14 shrink-0 fill-green-500 inline" viewBox="0 0 512 512">
+                                <path
+                                    d="M383.841 171.838c-7.881-8.31-21.02-8.676-29.343-.775L221.987 296.732l-63.204-64.893c-8.005-8.213-21.13-8.393-29.35-.387-8.213 7.998-8.386 21.137-.388 29.35l77.492 79.561a20.687 20.687 0 0 0 14.869 6.275 20.744 20.744 0 0 0 14.288-5.694l147.373-139.762c8.316-7.888 8.668-21.027.774-29.344z"
+                                    data-original="#000000" />
+                                <path
+                                    d="M256 0C114.84 0 0 114.84 0 256s114.84 256 256 256 256-114.84 256-256S397.16 0 256 0zm0 470.487c-118.265 0-214.487-96.214-214.487-214.487 0-118.265 96.221-214.487 214.487-214.487 118.272 0 214.487 96.221 214.487 214.487 0 118.272-96.215 214.487-214.487 214.487z"
+                                    data-original="#000000" />
+                            </svg>
+                            <h4 className="text-xl text-gray-800 mt-4">Product {product.name} added to cart!</h4>
+                        </div>
+
+
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
