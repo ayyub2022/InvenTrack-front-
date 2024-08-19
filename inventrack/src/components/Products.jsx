@@ -42,7 +42,7 @@ const Product = () => {
     const handleCategoryChange = async (e) => {
         setSelectedCategory(e.target.value);
         try {
-            const response = await axios.get(`http://127.0.0.1:5555/categories/${e.target.value}/products`);
+            const response = await axios.get(`https://inventrack-ovku.onrender.com/categories/${e.target.value}/products`);
             setProducts(response.data);
         } catch (error) {
             console.error('Error fetching products by category:', error);
@@ -74,7 +74,7 @@ const Product = () => {
             const formData = new FormData();
             formData.append('file', newProduct.image_file);
             try {
-                const imageResponse = await axios.post('http://127.0.0.1:5555/upload_image', formData, {
+                const imageResponse = await axios.post('https://inventrack-ovku.onrender.com/upload_image', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -89,7 +89,7 @@ const Product = () => {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:5555/create_product', {
+            const response = await axios.post('https://inventrack-ovku.onrender.com/create_product', {
                 ...newProduct,
                 image: imageUrl
             });

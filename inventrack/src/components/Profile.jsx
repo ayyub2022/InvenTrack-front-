@@ -10,7 +10,7 @@ export default function Profile() {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/profile", {
+        const response = await axios.get("https://inventrack-ovku.onrender.com/profile", {
           withCredentials: true, // This must be true to send cookies
         });
         setUser(response.data);

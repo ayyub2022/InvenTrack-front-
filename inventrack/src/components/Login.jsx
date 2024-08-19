@@ -35,13 +35,13 @@ const Login = ({ setIsAuthenticated }) => {
 
       if (isLogin) {
         response = await axios.post(
-          'http://localhost:5555/login',
+          'https://inventrack-ovku.onrender.com/login',
           { email: formData.email, password: formData.password },
           { withCredentials: true }
         );
       } else {
         response = await axios.post(
-          'http://localhost:5555/signup',
+          'https://inventrack-ovku.onrender.com/signup',
           {
             name: formData.name,
             email: formData.email,

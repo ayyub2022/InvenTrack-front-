@@ -9,7 +9,7 @@ const ProtectedRoute = ({ element: Component, ...rest }) => {
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
-        const response = await axios.get('http://localhost:5555/checksession', { withCredentials: true });
+        const response = await axios.get('https://inventrack-ovku.onrender.com/checksession', { withCredentials: true });
         setIsAuthenticated(response.status === 200);
       } catch (error) {
         setIsAuthenticated(false);

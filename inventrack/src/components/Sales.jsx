@@ -23,12 +23,12 @@ const Sales = () => {
           totalIncomeResponse,
           productSalesResponse,
         ] = await Promise.all([
-          axios.get("http://127.0.0.1:5555/best_seller_last_7_days"),
-          axios.get("http://127.0.0.1:5555/total_revenue"),
-          axios.get("http://127.0.0.1:5555/total_sale_return"),
-          axios.get("http://127.0.0.1:5555/total_purchase"),
-          axios.get("http://127.0.0.1:5555/total_income"),
-          axios.get("http://127.0.0.1:5555/product_sales"),
+          axios.get("https://inventrack-ovku.onrender.com/best_seller_last_7_days"),
+          axios.get("https://inventrack-ovku.onrender.com/total_revenue"),
+          axios.get("https://inventrack-ovku.onrender.com/total_sale_return"),
+          axios.get("https://inventrack-ovku.onrender.com/total_purchase"),
+          axios.get("https://inventrack-ovku.onrender.com/total_income"),
+          axios.get("https://inventrack-ovku.onrender.com/product_sales"),
         ]);
 
         setBestSellerLast7Days(bestSellerLast7DaysResponse.data);

@@ -39,7 +39,7 @@ const AuthForm = () => {
         // handle successful signup
       } else {
         const response = await axios.post(
-          'http://localhost:5555/login',
+          'https://inventrack-ovku.onrender.com/login',
           { email: formData.email, password: formData.password },
           { withCredentials: true } // This ensures cookies are sent and stored
         );

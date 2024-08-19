@@ -1,7 +1,7 @@
 // src/api/api.jsx
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:5555'; 
+const API_URL = 'https://inventrack-ovku.onrender.com'; 
 
 export const getTopSellingProduct = () => axios.get(`${API_URL}/top_selling_product`);
 export const getBestSellerLast7Days = () => axios.get(`${API_URL}/best_seller_last_7_days`);
@@ -22,7 +22,7 @@ export const fetchCategories = () => axios.get(`${API_URL}/categories`);
 export const signup = (data) => axios.post(`${API_URL}/signup`, data);
 export const login = (data) => axios.post(`${API_URL}/login`, data,{withCredentials:true})
 export const logout = () => axios.post(`${API_URL}/logout`);
-export const checkSession = () => axios.get('http://127.0.0.1:5555/checksession', { withCredentials: true })
+export const checkSession = () => axios.get('https://inventrack-ovku.onrender.com/checksession', { withCredentials: true })
 
 // User Management
 export const getUsers = () => axios.get(`${API_URL}/users`);

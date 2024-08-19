@@ -9,7 +9,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
-                const response = await axios.get('http://localhost:5555/checksession', { withCredentials: true });
+                const response = await axios.get('https://inventrack-ovku.onrender.com/checksession', { withCredentials: true });
                 setIsAuthenticated(response.status === 200);
             } catch (error) {
                 setIsAuthenticated(false);
@@ -21,7 +21,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:5555/logout', {}, { withCredentials: true });
+            await axios.post('https://inventrack-ovku.onrender.com/logout', {}, { withCredentials: true });
             setIsAuthenticated(false);
             navigate('/'); // Redirect to home page after logout
         } catch (error) {
