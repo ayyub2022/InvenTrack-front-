@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { fetchProducts, fetchCategories } from '../api';
+import { getProducts, createProduct, updateProduct, deleteProduct } from '../../api';  // Import the API functions
+import { fetchCategories } from '../../api';
 import ProductDetails from './ProductDetail';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const placeholderImage = 'https://via.placeholder.com/150';
 
-const Product = () => {
+const ClarkProduct = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -18,21 +19,20 @@ const Product = () => {
         bp: '',
         sp: '',
         image: '',
-        image_file: null  
+        image_file: null
     });
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const productsResponse = await fetchProducts();
+                const productsResponse = await getProducts();
                 setProducts(productsResponse.data);
 
                 const categoriesResponse = await fetchCategories();
                 setCategories(categoriesResponse.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                console.error('Error details:', error.response ? error.response.data : error.message);
             }
         };
 
@@ -40,15 +40,20 @@ const Product = () => {
     }, []);
 
     const handleCategoryChange = async (e) => {
-        setSelectedCategory(e.target.value);
+        const selectedCategoryId = e.target.value;
+        console.log('Selected Category ID:', selectedCategoryId); // Debugging
+    
+        setSelectedCategory(selectedCategoryId);
         try {
-            const response = await axios.get(`https://inventrack-ovku.onrender.com/categories/${e.target.value}/products`);
+            const response = await axios.get(`http://127.0.0.1:5555/categories/${selectedCategoryId}/products`);
+            console.log('Fetched Products:', response.data); // Debugging
+    
             setProducts(response.data);
         } catch (error) {
             console.error('Error fetching products by category:', error);
-            console.error('Error details:', error.response ? error.response.data : error.message);
         }
     };
+    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -61,7 +66,7 @@ const Product = () => {
     const handleFileChange = (e) => {
         setNewProduct(prevState => ({
             ...prevState,
-            image_file: e.target.files[0]  
+            image_file: e.target.files[0]
         }));
     };
 
@@ -74,39 +79,69 @@ const Product = () => {
             const formData = new FormData();
             formData.append('file', newProduct.image_file);
             try {
-                const imageResponse = await axios.post('https://inventrack-ovku.onrender.com/upload_image', formData, {
+                const imageResponse = await axios.post('http://127.0.0.1:5555/upload_image', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
                 imageUrl = imageResponse.data.image_url;
-                console.log('Uploaded image URL:', imageUrl);
             } catch (error) {
                 console.error('Error uploading image:', error);
-                console.error('Error details:', error.response ? error.response.data : error.message);
                 return;
             }
         }
 
         try {
-            const response = await axios.post('https://inventrack-ovku.onrender.com/create_product', {
-                ...newProduct,
-                image: imageUrl
-            });
-            setProducts(prevProducts => [...prevProducts, response.data]);
-            setNewProduct({
-                name: '',
-                category_id: '',
-                bp: '',
-                sp: '',
-                image: '',  
-                image_file: null  
-            });
-            setIsFormVisible(false);
+            if (selectedProduct) {
+                // Update the existing product
+                await updateProduct(selectedProduct.id, { ...newProduct, image: imageUrl });
+                setProducts(prevProducts =>
+                    prevProducts.map(product =>
+                        product.id === selectedProduct.id ? { ...product, ...newProduct, image: imageUrl } : product
+                    )
+                );
+                setSelectedProduct(null);
+            } else {
+                // Add a new product
+                const response = await createProduct({ ...newProduct, image: imageUrl });
+                setProducts(prevProducts => [...prevProducts, response.data]);
+            }
+
+            resetForm();
         } catch (error) {
-            console.error('Error adding product:', error);
-            console.error('Error details:', error.response ? error.response.data : error.message);
+            console.error('Error saving product:', error);
         }
+    };
+
+    const resetForm = () => {
+        setNewProduct({
+            name: '',
+            category_id: '',
+            bp: '',
+            sp: '',
+            image: '',
+            image_file: null
+        });
+        setIsFormVisible(false);
+        setSelectedProduct(null);
+    };
+
+    const handleDeleteProduct = async (productId) => {
+        try {
+            await deleteProduct(productId);
+            setProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    };
+
+    const handleEditProduct = (product) => {
+        setNewProduct({
+            ...product,
+            image_file: null
+        });
+        setIsFormVisible(true);
+        setSelectedProduct(product);
     };
 
     const handleProductClick = (product) => {
@@ -133,7 +168,7 @@ const Product = () => {
                 </select>
             </div>
             <button className="add-product-btn" onClick={() => setIsFormVisible(!isFormVisible)}>
-                Add Product
+                {selectedProduct ? 'Edit Product' : 'Add Product'}
             </button>
             {isFormVisible && (
                 <form className="add-product-form" onSubmit={handleSubmit}>
@@ -200,24 +235,31 @@ const Product = () => {
                             onChange={handleFileChange}
                         />
                     </label>
-                    <button type="submit">Add Product</button>
+                    <button type="submit">
+                        {selectedProduct ? 'Update Product' : 'Add Product'}
+                    </button>
                 </form>
             )}
             <div className="product-list">
                 {products.length > 0 ? (
                     products.map(product => (
-                        <div
-                            key={product.id}
-                            className="bg-white shadow rounded p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-                            onClick={() => handleProductClick(product)}
-                        >
-                            <img
-                                src={product.image || placeholderImage}
-                                alt={product.name}
-                                className="w-full h-auto max-h-48 object-contain rounded"
+                        <div key={product.id} className="product-item">
+                            <h3>{product.name}</h3>
+                            <p>Price: {product.sp}</p>
+                            <p>Category ID: {product.category_id}</p>
+                            <img 
+                                src={product.image || placeholderImage} 
+                                alt={product.name} 
+                                className="product-image"
+                                onError={(e) => {
+                                    console.error(`Error loading image for product ${product.name}`);
+                                    e.target.src = placeholderImage;
+                                }}
                             />
-                            <h3 className="text-xl font-semibold mt-2">{product.name}</h3>
-                            <p className="text-lg text-gray-600">${parseFloat(product.sp).toLocaleString()}</p>
+                            <div className="product-actions">
+                                <button onClick={() => handleEditProduct(product)}>Edit</button>
+                                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                            </div>
                         </div>
                     ))
                 ) : (
@@ -231,4 +273,4 @@ const Product = () => {
     );
 };
 
-export default Product;
+export default ClarkProduct;

@@ -19,8 +19,7 @@ import PaymentStatus from './components/Admin/PaymentStatus';
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminAuthPage from "./components/Admin/AdminAuthPage";
 // import ProtectedRoute from "./components/Admin/ProtectedRoute";
-//import ClarkProduct from './components/Clark/ClarkProducts';
-
+import ClarkProducts from './components/Clark/ClarkProducts';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -60,7 +59,7 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/paymentstatus" element={<PaymentStatus />} />
           <Route path="/admin/login" element={< AdminAuthPage/>} />
-          {/* <Route path="/clark-products" element={<ClarkProduct />} /> */}
+          <Route path="/clark-products" element={<ClarkProducts />} />
           <Route path="/admin/supplyrequest" element={<SupplyRequest />} />
         </Routes>
       </div>
