@@ -11,6 +11,9 @@
 .welcome-header {
     text-align: center;
     margin-bottom: 20px;
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .welcome-header h1 {

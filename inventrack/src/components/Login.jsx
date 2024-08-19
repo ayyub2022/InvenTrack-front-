@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+
+ import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import './Login.css';
+import { Navigate} from 'react-router-dom';
 
 const Login = ({ setIsAuthenticated }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -126,26 +128,19 @@ const Login = ({ setIsAuthenticated }) => {
               </select>
             </div>
           )}
-          <div className="flex justify-center mb-4">
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-            >
-              {loading ? 'Processing...' : isLogin ? 'Login' : 'Sign Up'}
-            </button>
-          </div>
-          {error && <div className="text-red-500 text-center mb-4">{error}</div>}
-          {success && <div className="text-green-500 text-center mb-4">{success}</div>}
-        </form>
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="bg-blue-500 text-white hover:bg-blue-600 font-medium py-2 px-4 rounded-lg transition duration-200"
-          >
-            {isLogin ? 'Already have an account? Sign Up' : 'Switch to Login'}
+          <button type="submit" disabled={loading}>
+            {loading ? 'Processing...' : (isLogin ? 'Login' : 'Sign Up')}
           </button>
-        </div>
+          {error && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success==="Login successful"?<>
+          <Navigate to={'/'}/>
+          {setIsAuthenticated(true)}
+          </>:<></>}</div>}
+        </form>
+        <button onClick={() => setIsLogin(!isLogin)}>
+          {isLogin ? 'Switch to Sign Up' : 'Switch to Login'}
+
+        </button>
       </div>
     </div>
   );
