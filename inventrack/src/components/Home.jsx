@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import './Home.css'; 
+import './Home.css';
 
 const Home = () => {
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(value);
+    };
     const [data, setData] = useState({
         bestSellerLast7Days: null,
         totalRevenue: null,
@@ -19,15 +25,15 @@ const Home = () => {
                     axios.get("http://127.0.0.1:5555/total_revenue"),
                     axios.get("http://127.0.0.1:5555/total_sale_return"),
                     axios.get("http://127.0.0.1:5555/total_purchase"),
-                  
+
                 ]);
-                
+
                 setData({
                     bestSellerLast7Days: bestSellerLast7DaysResponse.data,
                     totalRevenue: totalRevenueResponse.data,
                     totalSaleReturn: totalSaleReturnResponse.data,
                     totalPurchase: totalPurchaseResponse.data,
-                  
+
                 });
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -50,7 +56,7 @@ const Home = () => {
                     className="welcome-image"
                 />
             </header>
-            
+
             <div className="card-container">
                 <div className="card">
                     <h2>Best Seller from Last 7 Days</h2>
@@ -63,7 +69,7 @@ const Home = () => {
                 <div className="card">
                     <h2>Total Revenue</h2>
                     {totalRevenue ? (
-                        <p>${totalRevenue.total_revenue}</p>
+                        <p>{formatCurrency(totalRevenue.total_revenue)}</p>
                     ) : (
                         <p>Loading...</p>
                     )}
@@ -71,7 +77,7 @@ const Home = () => {
                 <div className="card">
                     <h2>Total Sale Return</h2>
                     {totalSaleReturn ? (
-                        <p>${totalSaleReturn.total_sale_return}</p>
+                        <p>{formatCurrency(totalSaleReturn.total_sale_return)}</p>
                     ) : (
                         <p>Loading...</p>
                     )}
@@ -79,12 +85,12 @@ const Home = () => {
                 <div className="card">
                     <h2>Total Purchase</h2>
                     {totalPurchase ? (
-                        <p>${totalPurchase.total_purchase}</p>
+                        <p>{formatCurrency(totalPurchase.total_purchase)}</p>
                     ) : (
                         <p>Loading...</p>
                     )}
                 </div>
-                
+
             </div>
         </div>
     );
