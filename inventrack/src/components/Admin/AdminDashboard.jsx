@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
-import SupplyRequest from '../Admin/SupplyRequest.jsx'; // Import SupplyRequest component
+//import SupplyRequest from '../Admin/SupplyRequest.jsx'; // Import SupplyRequest component
 import './AdminDashboard.css';
-import AdminAuthPage from './AdminAuthPage.jsx';
+//import AdminAuthPage from './AdminAuthPage.jsx';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();

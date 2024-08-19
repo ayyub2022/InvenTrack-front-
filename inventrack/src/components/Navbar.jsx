@@ -1,31 +1,29 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Navbar.css';
-//eslint-diable-next-line
-const Navbar = ({isAuthenticated, setIsAuthenticated}) => {
+
+const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     const navigate = useNavigate();
+
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
                 const response = await axios.get('http://localhost:5555/checksession', { withCredentials: true });
-                //eslint-diable-next-line
                 setIsAuthenticated(response.status === 200);
             } catch (error) {
-                //eslint-diable-next-line
                 setIsAuthenticated(false);
             }
         };
 
         checkAuthentication();
-        //eslint-enable-next-line
-    }, [isAuthenticated]);
+    }, [setIsAuthenticated]); // Added setIsAuthenticated to the dependency array
 
     const handleLogout = async () => {
         try {
             await axios.post('http://localhost:5555/logout', {}, { withCredentials: true });
             setIsAuthenticated(false);
-            navigate('/'); // Redirect to login page after logout
+            navigate('/'); // Redirect to home page after logout
         } catch (error) {
             console.error('Error logging out:', error);
         }
@@ -54,4 +52,3 @@ const Navbar = ({isAuthenticated, setIsAuthenticated}) => {
 };
 
 export default Navbar;
-

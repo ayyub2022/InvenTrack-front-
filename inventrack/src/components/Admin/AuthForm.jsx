@@ -85,6 +85,9 @@ const AuthForm = () => {
         />
         <button type="submit">{isSignup ? 'Signup' : 'Login'}</button>
       </form>
+      <button onClick={toggleForm} className="toggle-form-btn">
+        {isSignup ? 'Switch to Login' : 'Switch to Signup'}
+      </button>
     </div>
   );
 };
