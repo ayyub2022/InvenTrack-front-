@@ -1,8 +1,8 @@
-
- InvenTrack
+```markdown
+# InvenTrack
 
  Overview
- 
+
 InvenTrack is a comprehensive store management system designed to streamline inventory, sales, and administrative tasks. It provides an intuitive dashboard for monitoring store performance, managing clerks, handling supply requests, processing payments, and overseeing admins. The system is built using modern web technologies and is tailored to meet the needs of small to medium-sized businesses.
 
  Features
@@ -150,3 +150,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
  Contact
 For inquiries, suggestions, or contributions, feel free to contact [InvenTrack].
 ```
+

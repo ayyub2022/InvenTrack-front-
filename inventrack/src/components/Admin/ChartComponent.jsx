@@ -9,21 +9,17 @@ const ChartComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-      
         const salesResponse = await fetch('http://127.0.0.1:5555/sales_data');
         const salesData = await salesResponse.json();
 
-      
         const profitLossResponse = await fetch('http://127.0.0.1:5555/profit_loss_data'); 
         const profitLossData = await profitLossResponse.json();
 
-       
         const labels = salesData.map(item => item.date);
         const salesAmounts = salesData.map(item => item.amount);
 
         const profitLossAmounts = profitLossData.map(item => item.amount); 
 
-       
         const barColors = [
           'rgba(75, 192, 192, 0.2)', 
           'rgba(153, 102, 255, 0.2)', 
@@ -117,8 +113,8 @@ const ChartComponent = () => {
   }, [chartData]);
 
   return (
-    <div style={{ position: 'relative', height: '400px', width: '600px' }}>
-      <canvas ref={canvasRef}></canvas>
+    <div>
+      <canvas ref={canvasRef} />
     </div>
   );
 };

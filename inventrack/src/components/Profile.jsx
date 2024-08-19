@@ -7,7 +7,6 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   // const navigate = useNavigate();
-
   useEffect(() => {
     const getUserProfile = async () => {
       try {
