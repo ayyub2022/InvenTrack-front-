@@ -1,8 +1,8 @@
 
- import React, { useState } from 'react';
+ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Login.css';
-import { Navigate} from 'react-router-dom';
+import { useNavigate, Navigate} from 'react-router-dom';
 
 const Login = ({ setIsAuthenticated }) => {
   const [isLogin, setIsLogin] = useState(true);
