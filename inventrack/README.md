@@ -1,4 +1,4 @@
-```markdown
+
 # InvenTrack
 
 ## Overview
@@ -151,3 +151,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 For inquiries, suggestions, or contributions, feel free to contact [InvenTrack].
 ```
+

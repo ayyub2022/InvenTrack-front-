@@ -18,7 +18,7 @@ const Product = () => {
         category_id: '',
         bp: '',
         sp: '',
-        image: '',  // Change from image_url to image
+        image: '',
         image_file: null  
     });
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -33,6 +33,7 @@ const Product = () => {
                 setCategories(categoriesResponse.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                console.error('Error details:', error.response ? error.response.data : error.message);
             }
         };
 
@@ -46,6 +47,7 @@ const Product = () => {
             setProducts(response.data);
         } catch (error) {
             console.error('Error fetching products by category:', error);
+            console.error('Error details:', error.response ? error.response.data : error.message);
         }
     };
 
@@ -82,6 +84,7 @@ const Product = () => {
                 console.log('Uploaded image URL:', imageUrl);
             } catch (error) {
                 console.error('Error uploading image:', error);
+                console.error('Error details:', error.response ? error.response.data : error.message);
                 return;
             }
         }
@@ -103,6 +106,7 @@ const Product = () => {
             setIsFormVisible(false);
         } catch (error) {
             console.error('Error adding product:', error);
+            console.error('Error details:', error.response ? error.response.data : error.message);
         }
     };
 
@@ -211,7 +215,10 @@ const Product = () => {
                                 src={product.image || placeholderImage} 
                                 alt={product.name} 
                                 className="product-image"
-                                onError={(e) => e.target.src = placeholderImage}
+                                onError={(e) => {
+                                    console.error(`Error loading image for product ${product.name}`);
+                                    e.target.src = placeholderImage;
+                                }}
                             />
                         </div>
                     ))
