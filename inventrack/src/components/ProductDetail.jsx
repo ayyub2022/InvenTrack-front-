@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './ProductDetail.css'; // Importing CSS file for styling
+import './ProductDetail.css';
 import { getProduct } from '../api';
 
 const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
     const [product, setProduct] = useState(null);
-    const [quantity, setQuantity] = useState(1); // State to track quantity
-    const [showNotification, setShowNotification] = useState(false); // State to show notification
-    const [error, setError] = useState(''); // State to handle error
-    const [showLoginPrompt, setShowLoginPrompt] = useState(false); // State to handle login prompt
-    const { productId } = useParams(); // Destructure id from useParams
-    const navigate = useNavigate(); // Initialize useNavigate hook
+    const [quantity, setQuantity] = useState(1);
+    const [showNotification, setShowNotification] = useState(false);
+    const [error, setError] = useState('');
+    const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+    const { productId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,11 +28,12 @@ const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
 
     const handleAddToCart = () => {
         if (isLoggedIn) {
+            console.log('Product to add:', { ...product, quantity });
             addToCart({ ...product, quantity });
-            setShowNotification(true); // Show notification
-            setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
+            setShowNotification(true);
+            setTimeout(() => setShowNotification(false), 3000);
         } else {
-            setShowLoginPrompt(true); // Show login prompt
+            setShowLoginPrompt(true);
         }
     };
 
@@ -44,19 +45,19 @@ const ProductDetail = ({ addToCart, isAddedToCart, isLoggedIn }) => {
     };
 
     const handleClose = () => {
-        navigate('/products'); // Navigate to products page
+        navigate('/products');
     };
 
     const handleLoginRedirect = () => {
-        navigate('/login'); // Navigate to login page
+        navigate('/login');
     };
 
     if (error) {
-        return <div className="error-message">{error}</div>; // Show error message if there is an error
+        return <div className="error-message">{error}</div>;
     }
 
     if (!product) {
-        return <div className="loading-message">Loading...</div>; // Show loading state
+        return <div className="loading-message">Loading...</div>;
     }
 
     return (

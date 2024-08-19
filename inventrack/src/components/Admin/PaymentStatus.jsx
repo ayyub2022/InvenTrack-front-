@@ -1,10 +1,12 @@
 // src/components/Admin/PaymentStatus.jsx
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { getPaymentStatus } from '../../api'; // Corrected import path
 import './PaymentStatus.css'; // Ensure this file exists or remove if not used
 
 const PaymentStatus = () => {
   const [status, setStatus] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -22,6 +24,12 @@ const PaymentStatus = () => {
   return (
     <div className="payment-status">
       <h1>Payment Status</h1>
+      
+      {/* Button to go back to the Admin Dashboard */}
+      <button className="go-back-btn" onClick={() => navigate('/admin/dashboard')}>
+        Go Back to Admin Dashboard
+      </button>
+
       <table>
         <thead>
           <tr>

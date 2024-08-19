@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { fetchProducts, fetchCategories } from '../api';
 import ProductDetails from './ProductDetail';
-import './Product.css';
 import { useNavigate } from 'react-router-dom';
 
 const placeholderImage = 'https://via.placeholder.com/150';
@@ -19,7 +18,7 @@ const Product = () => {
         bp: '',
         sp: '',
         image: '',
-        image_file: null  
+        image_file: null
     });
     const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -62,7 +61,7 @@ const Product = () => {
     const handleFileChange = (e) => {
         setNewProduct(prevState => ({
             ...prevState,
-            image_file: e.target.files[0]  
+            image_file: e.target.files[0]
         }));
     };
 
@@ -100,8 +99,8 @@ const Product = () => {
                 category_id: '',
                 bp: '',
                 sp: '',
-                image: '',  
-                image_file: null  
+                image: '',
+                image_file: null
             });
             setIsFormVisible(false);
         } catch (error) {
@@ -120,40 +119,52 @@ const Product = () => {
     };
 
     return (
-        <div className="product-container">
-            <h2>Products</h2>
-            <div className="filter-section">
-                <label htmlFor="category">Category:</label>
-                <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                    <option value="">All Categories</option>
-                    {categories.map(category => (
-                        <option key={category.id} value={category.id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
+        <div className="max-w-6xl mx-auto p-4">
+            <h2 className="text-3xl font-semibold mb-4">Products</h2>
+            <div className="mb-4 flex justify-between items-center">
+                <div>
+                    <label htmlFor="category" className="mr-2">Category:</label>
+                    <select
+                        id="category"
+                        value={selectedCategory}
+                        onChange={handleCategoryChange}
+                        className="border rounded p-2"
+                    >
+                        <option value="">All Categories</option>
+                        {categories.map(category => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    onClick={() => setIsFormVisible(!isFormVisible)}
+                >
+                    Add Product
+                </button>
             </div>
-            <button className="add-product-btn" onClick={() => setIsFormVisible(!isFormVisible)}>
-                Add Product
-            </button>
             {isFormVisible && (
-                <form className="add-product-form" onSubmit={handleSubmit}>
-                    <label>
+                <form className="mb-6 p-4 border rounded" onSubmit={handleSubmit}>
+                    <label className="block mb-2">
                         Name:
                         <input
                             type="text"
                             name="name"
                             value={newProduct.name}
                             onChange={handleInputChange}
+                            className="w-full p-2 border rounded"
                             required
                         />
                     </label>
-                    <label>
+                    <label className="block mb-2">
                         Category:
                         <select
                             name="category_id"
                             value={newProduct.category_id}
                             onChange={handleInputChange}
+                            className="w-full p-2 border rounded"
                             required
                         >
                             <option value="">Select Category</option>
@@ -164,62 +175,70 @@ const Product = () => {
                             ))}
                         </select>
                     </label>
-                    <label>
+                    <label className="block mb-2">
                         Buying Price:
                         <input
                             type="number"
                             name="bp"
                             value={newProduct.bp}
                             onChange={handleInputChange}
+                            className="w-full p-2 border rounded"
                             required
                         />
                     </label>
-                    <label>
+                    <label className="block mb-2">
                         Selling Price:
                         <input
                             type="number"
                             name="sp"
                             value={newProduct.sp}
                             onChange={handleInputChange}
+                            className="w-full p-2 border rounded"
                             required
                         />
                     </label>
-                    <label>
+                    <label className="block mb-2">
                         Image URL:
                         <input
                             type="text"
                             name="image"
                             value={newProduct.image}
                             onChange={handleInputChange}
+                            className="w-full p-2 border rounded"
                         />
                     </label>
-                    <label>
+                    <label className="block mb-2">
                         Or choose file:
                         <input
                             type="file"
                             name="image_file"
                             onChange={handleFileChange}
+                            className="w-full p-2 border rounded"
                         />
                     </label>
-                    <button type="submit">Add Product</button>
+                    <button
+                        type="submit"
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                    >
+                        Add Product
+                    </button>
                 </form>
             )}
-            <div className="product-list">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {products.length > 0 ? (
                     products.map(product => (
-                        <div key={product.id} className="product-item" onClick={() => handleProductClick(product)}>
-                            <h3>{product.name}</h3>
-                            <p>Price: {product.sp}</p>
-                            <p>Category ID: {product.category_id}</p>
-                            <img 
-                                src={product.image || placeholderImage} 
-                                alt={product.name} 
-                                className="product-image"
-                                onError={(e) => {
-                                    console.error(`Error loading image for product ${product.name}`);
-                                    e.target.src = placeholderImage;
-                                }}
+                        <div
+                            key={product.id}
+                            className="bg-white shadow rounded p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                            onClick={() => handleProductClick(product)}
+                        >
+                            <img
+                                src={product.image || placeholderImage}
+                                alt={product.name}
+                                className="w-full h-auto max-h-48 object-contain rounded"
                             />
+                            <h3 className="text-xl font-semibold mt-2">{product.name}</h3>
+                            <p className="text-lg text-gray-600">${parseFloat(product.sp).toLocaleString()}</p>
                         </div>
                     ))
                 ) : (
